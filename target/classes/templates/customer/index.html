@@ -1,0 +1,48 @@
+<!DOCTYPE html><html xmlns="http://www.thymeleaf.org">
+<head><meta charset="UTF-8">
+<title>REAL Library Management</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<style>
+#div{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:100px;
+}
+body {
+  background-image: url(" https://images.unsplash.com/photo-1515705576963-95cad62945b6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bWlsa3klMjB3YXl8ZW58MHx8MHx8&w=1000&q=80");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+</style>
+</head>
+<body>   
+<br><br>
+<div align="center" id="div">
+
+<h1 style="color: white;"> Welcome to REAL Library Management System. </h1>  <br><br><br><br>
+  <br><br>
+
+<br><br>
+<a href="/toCustLoginPage" id="homeBtn"><button class="btn bg-danger text-light btn-lg">Enter</button></a> 
+
+  <br><br>
+
+<br><br>
+</div>
+
+</body>
+<script type="text/javascript">
+
+var role = document.getElementById("role").value;
+    if (role == "AUTHOR") { // use == to compare value
+        document.getElementById("homeButton").href="/authorHome"; 
+    } else if (role == "CUSTOMER"){
+        document.getElementById("homeButton").href="/customerHome";
+    } else if (role == "ADMIN"){
+    	document.getElementById("homeButton").href="/adminHome";
+    } else if (role == "STAFF"){
+    	document.getElementById("homeButton").href="/empHome";
+    }
+</script>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<meta charset="ISO-8859-1">
+<title></title>
+<style>
+#div{
+	width:600px;
+	height:218px;
+	margin:auto;
+	margin-top:100px;
+}
+body {
+  background-image: url("https://media-cldnry.s-nbcnews.com/image/upload/newscms/2019_04/1403929/niagara-falls-frozen-today-inline-190123-03.jpg");
+  background-position: center;
+  background-repeat: repeat-Y;
+  background-size: cover;
+}
+</style>
+</head>
+<body class="container-fluid">
+	<div class="card" id="div">
+		<h2 class="card-header text-center bg-danger text-light"> Add New Copies Here </h2>
+		<form method="POST" action="/addCopy">
+			<table  class="table table-hover table-striped">
+				<tr>
+					<td>Enter Copy's Book ID: </td>
+					<td><input type="text" name="bid"></td>
+				</tr>	
+				<tr>
+					<td>Enter Copy's Volumes to Add: </td>
+					<td><input type="text" name="volumn"></td>
+				</tr>											
+				<tr>
+					<td><input type="submit" value="insert" class="btn btn-outline-success"></td>
+					<td><input type="reset" value="clear" class="btn btn-outline-danger"></td>
+				</tr>
+				<tr>
+					<p th:text="${submit_res}" style="color:red"></p>
+				</tr>
+			</table>
+		</form>
+	</div>
+	
+	
+<a href="/copyList"><button  class="btn btn-outline-danger">back</button></a> 
+<a href="/index"><button class="btn btn-outline-primary">Home</button></a> 
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Manage Employees</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<style>
+#div{
+	width:1400px;
+	height:auto;
+	margin:auto;
+	margin-top:50px;
+}
+#opForm{
+	background-color: coral;
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:20px;
+}
+#result{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:10px;
+}
+body {
+  background-image: url("https://cdn.mos.cms.futurecdn.net/S463HbXSHA4zUhoENDSheb.jpg");
+  background-position: center;
+  background-repeat: repeat-Y;
+  background-size: cover;
+}
+</style>
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> 
+ <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+function showOp(){
+	$("#opForm").show();
+}
+</script>
+
+</head><body class="container-fluid">    
+<button onclick="showOp()">Operation</button>
+<br> <br>
+<div  class="card" id="opForm" align="center" style="display:none"> 
+<form>
+<h6> Emp ID:   <input type="text" name="emp_id"/></h6>  <br>
+<h6> Emp Username:   <input type="text" name="emp_uname"/></h6>  <br>
+<h6> Emp Password: <input type="text" name="emp_pwd" /></h6>  <br>
+
+<button id="QueryBtn" value="Search" formaction="/queryEmployees" class="btn btn-outline-secondary"> Search </button>
+<button id="AddBtn" value="Insert" formaction="/regEmployee" class="btn btn-outline-secondary"> Add </button>
+<button id="AddBtn" value="Insert" formaction="/activateEmpAccnt" class="btn btn-outline-primary"> Activate </button>
+<button id="AddBtn" value="Insert" formaction="/freezeEmpAccnt" class="btn btn-outline-danger"> Freeze </button>
+
+</form>
+</div> 
+
+<p th:text="${submit_res}" style="color:red"></p>
+
+<div  class="card" id="div" align="center">       
+<table class="table table-hover table-striped">            
+<tr> 
+<th class="card-header text-center bg-info text-light">Emp Id</th> 
+<th class="card-header text-center bg-primary text-light">Emp Username</th>               
+<th class="card-header text-center bg-danger text-light">First Name</th>                
+<th class="card-header text-center bg-primary text-light">Last Name</th>
+<th class="card-header text-center bg-info text-light">Street</th>                   
+<th class="card-header text-center bg-danger text-light">City</th>                
+<th class="card-header text-center bg-primary text-light">State</th>
+<th class="card-header text-center bg-info text-light">Country</th>   
+<th class="card-header text-center bg-danger text-light">DOB</th>                
+<th class="card-header text-center bg-primary text-light">Status</th>
+<th class="card-header text-center bg-info text-light">Phone Number</th>   
+<th class="card-header text-center bg-danger text-light">Email</th>                
+                  
+</tr>         
+<tr th:each="employee:${empList}">                
+<td align="center" th:text="${employee.emp_id}"></td> 
+<td align="center" th:text="${employee.emp_uname}"></td> 
+<td align="center" th:text="${employee.emp_fname}"></td>     
+<td align="center" th:text="${employee.emp_Lname}"></td> 
+<td align="center" th:text="${employee.emp_stree}"></td> 
+<td align="center" th:text="${employee.emp_city}"></td> 
+<td align="center" th:text="${employee.emp_state}"></td> 
+<td align="center" th:text="${employee.emp_country}"></td> 
+<td align="center" th:text="${employee.emp_dob}"></td> 
+<td align="center" th:text="${employee.emp_status}"></td> 
+<td align="center" th:text="${employee.emp_phone_no}"></td> 
+<td align="center" th:text="${employee.emp_email}"></td>                  
+</tr>    
+ </table>    
+ </div>
+ 
+ <a href="/toAdminHome"><button class="btn btn-primary">Home</button></a> 
+                                     
+ </body>

@@ -1,0 +1,35 @@
+<!DOCTYPE html><html xmlns="http://www.thymeleaf.org">
+<head><meta charset="UTF-8">
+<title>Author Home</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<style>
+#div{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:100px;
+}
+body {
+  background-image: url("https://static.scientificamerican.com/sciam/cache/file/B73C6A04-9155-44EC-B80AA2B5E9E62508.jpg");
+  background-position: center;
+  background-repeat: repeat-Y;
+  background-size: cover;
+}
+</style>
+</head>
+<body>   Welcome to Author Home!
+<br><br>
+<div align="center" id="div">
+<a href="/bookList"><button class="btn bg-danger text-light">Book</button></a> <br><br>
+<a href="/authBookList"><button class="btn bg-primary text-light">Work Gallery</button></a> <br><br> 
+
+<a href="/authList"><button class="btn bg-primary text-light">Author Gallery</button></a> <br><br> 
+
+<a href="/futureSeminars"><button class="btn bg-info text-light">Seminar</button></a> <br><br>
+<a href="/viewOwnInvitation"><button class="btn bg-dark text-light">Seminar Invitations</button></a> <br><br> 
+<a href="/authProfile"><button class="btn bg-secondary text-light">Profile</button></a> <br><br> 
+<a href="/logout"><button class="btn btn-danger">Logout</button></a> <br><br>
+</div>
+
+</body>
+</html>

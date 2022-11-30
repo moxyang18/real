@@ -1,0 +1,163 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Upcoming Seminar List</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<style>
+#div{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:50px;
+}
+#opForm{
+	background-color: coral;
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:20px;
+}
+#opForm2{
+	background-color: coral;
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:20px;
+}
+#result{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:10px;
+}
+body {
+  background-image: url("https://cdn.mos.cms.futurecdn.net/S463HbXSHA4zUhoENDSheb.jpg");
+  background-position: center;
+  background-repeat: repeat-Y;
+  background-size: cover;
+}
+</style>
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> 
+ <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+function showSOp(){
+	$("#opForm").show();
+	$("#AddBtn2").show();
+	$("#UptBtn2").show();
+	$("#DelBtn2").show();
+	$("#QueryBtn2").show();
+	$("#QueryBtn").hide();
+	$("#AddBtn").hide();
+	$("#UptBtn").hide();
+	$("#DelBtn").hide();
+	$("#sem_capacity").show();
+	$("#expense").hide();
+	$("#type_input").val('S');
+	$("#type_str").val("Seminar");
+}
+var dateTomorrow = new Date(); 
+dateTomorrow.setDate(dateTomorrow.getDate() + 1)
+$(function() {
+    $( "#datepicker" ).datepicker({
+        numberOfMonths: 3,
+        showButtonPanel: true,
+        minDate: dateTomorrow
+    });
+});
+</script>
+
+</head><body class="container-fluid">    
+<button onclick="showSOp()" class="btn btn-warning">Operation</button>
+<br> <br>
+<div  class="card" id="opForm" align="center" style="display:none"> 
+<form>
+<h6> Event Id:   <input type="text" name="event_id"/></h6>  <br>
+<h6>Event Name:   <input type="text" name="event_name"/></h6>  <br>
+<h6>Event Type: <input type="text" id="type_str" readonly="readonly"/></h6>  <br>
+<input type="hidden" id="type_input" name="event_type" value='E' readonly="readonly"/> 
+
+<h6>StartDatetime: <input type="datetime-local" name="start_datetime" id="start_datetime"></h6> <br>
+            
+<h6>StopDatetime: <input type="datetime-local" name="stop_datetime" id="stop_datetime"></h6> <br>
+
+<h6>Topic id:<input type="text" name="topic_id"/></h6>  <br>
+
+<h6 id="expense">Expense:<input type="text" name="expense"/> </h6> <br>
+
+<h6 id="sem_capacity">Seminar Capacity:<input type="text" name="SEM_CAPACITY"/> </h6> <br>
+
+<button id="QueryBtn2" value="Search" formaction="/qryUpcomingSem" class="btn btn-outline-secondary"> Search </button>
+
+
+<script>
+    //Do not let to select START TIME  in the PAST
+    let today = new Date();
+    today.setDate(today.getDate());
+    today = today.toISOString().slice(0, 16);
+
+    document.getElementsByName("start_datetime")[0].min = today;//tomorrow;
+   // document.getElementsByName("start_datetime")[0].max = today;
+    
+    document.getElementsByName("stop_datetime")[0].min = today;
+   // document.getElementsByName("stop_datetime")[0].max = today;   
+</script> 
+</form>
+</div> 
+
+
+<div  class="card" id="opForm2" align="center" style="display:none"> 
+<form>
+
+Event Name:   <input type="text" name="event_name"/>  <br><br>
+Event Type: <input type="text" value='Seminar' readonly="readonly"/>  <br><br>
+<input type="hidden" name="event_type" value='S' readonly="readonly"/> 
+
+StartDatetime: <input type="datetime-local" name="start_datetime" id="start_datetime"> <br><br>
+            
+StopDatetime: <input type="datetime-local" name="stop_datetime" id="stop_datetime"> <br><br>
+
+Topic id:<input type="text" name="topic_id"/>  <br><br>
+
+Seminar Capacity:<input type="text" name="expense"/>  <br><br>
+
+<button id="QueryBtn" value="Search" formaction="/qryUpcomingSem" class="btn btn-outline-secondary"> Search </button>
+
+<script>
+    //Do not let to select START TIME  in the PAST
+    let today2 = new Date();
+    today2.setDate(today2.getDate());
+    today2 = today2.toISOString().slice(0, 16);
+
+    document.getElementsByName("start_datetime")[0].min = today2;//tomorrow;
+   // document.getElementsByName("start_datetime")[0].max = today;
+    
+    document.getElementsByName("stop_datetime")[0].min = today2;
+   // document.getElementsByName("stop_datetime")[0].max = today;   
+</script> 
+</form>
+</div> 
+
+
+<p th:text="${submit_res}" style="color:red"></p>
+
+<div  class="card" id="div" align="center">       
+<table class="table table-hover table-striped">            
+<tr> 
+<th class="card-header text-center bg-info text-light">Event Id</th>                   
+<th class="card-header text-center bg-danger text-light">Event Name</th>                
+<th class="card-header text-center bg-secondary text-light">StartDatetime</th> 
+<th class="card-header text-center bg-secondary text-light">StopDatetime</th>     
+<th class="card-header text-center bg-info text-light">Topic Id</th>                        
+</tr>         
+<tr th:each="event:${eventList}">                
+<td align="center" class="bid" id= "bid" th:text="${event.event_id}"></td>                
+<td align="center" th:text="${event.event_name}"></td>    
+<td align="center" th:text="${event.start_datetime}"></td> 
+<td align="center" th:text="${event.stop_datetime}"></td>             
+<td align="center" th:text="${event.topic_id}"></td>                          
+</tr>    
+ </table>    
+ </div>
+ 
+ <a href="/authorHome"><button class="btn btn-primary">Home</button></a> 
+                                     
+ </body>

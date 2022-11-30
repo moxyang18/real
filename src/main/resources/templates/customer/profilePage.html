@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> 
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<meta charset="ISO-8859-1">
+<title>Customer Profile</title>
+<style>
+#div{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:100px;
+}
+body {
+  background-image: url("https://cdn.mos.cms.futurecdn.net/S463HbXSHA4zUhoENDSheb.jpg");
+  background-position: center;
+  background-repeat: repeat-Y;
+  background-size: cover;
+}
+</style>
+
+
+
+
+<script>
+function showEOp(){
+	$("#opForm").show();
+	$("#UptBtn").show();
+	$("#UptBtn2").hide();
+	$("#pwdChange1").hide();
+	$("#pwdChange2").hide();
+	$("#unameChange").show();
+}
+function showSOp(){
+	$("#opForm").show();
+	$("#UptBtn2").show();
+	$("#UptBtn").hide();
+	$("#unameChange").hide();
+	$("#pwdChange1").show();
+	$("#pwdChange2").show();
+}
+</script>
+
+</head>
+<body class="container-fluid">    
+	<button onclick="showEOp()" class="btn btn-primary">Change Username</button>
+	<button onclick="showSOp()" class="btn btn-danger">Change Password</button>
+	<br> <br>
+	<div  class="card" id="opForm" align="center" style="display:none"> 
+	<form method="POST">
+	<div id="unameChange"><h6>Event New User Name:   <input type="text" name="USERNAME"/></h6>  <br></div>
+	
+	<div id="pwdChange1"><h6>Enter Old Password:   <input type="text" name="OLDPWD"/></h6>   <br> </div>
+	<div id="pwdChange2"><h6>Enter New Password:   <input type="text" name="PWD"/></h6>    <br></div>
+	
+	<button id="UptBtn" value="Update" formaction="/uptUsername" class="btn btn-outline-secondary"> Change Username </button>
+	
+	<button id="UptBtn2" value="Update" formaction="/uptUserpwd" class="btn btn-outline-secondary"> Change Password </button>
+		
+				
+	</form>
+	</div>
+	
+			<div>			<p th:text="${submit_res_upper}" style="color:red"></p></div>
+	
+	<div class="card" id="div">
+		<h2 class="card-header text-center bg-danger text-light"> Customer Profile </h2>
+		<form method="POST">
+			<table class="table table-hover table-striped">
+				<tr>
+					<td> Username: </td>
+					<td><input type="text" name="username" th:value="${userPart.username}"  onchange="changeValue(this)" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td> First Name: </td>
+					<td><input type="text" name="fname" th:value="${userPart.fname}" onchange="changeValue(this)" required></td>
+				</tr>					
+				<tr>
+					<td> Last Name: </td>
+					<td><input type="text" name="lname" th:value="${userPart.lname}" onchange="changeValue(this)" required></td>
+				</tr>					
+				<tr>
+					<td> Email: </td>
+					<td><input type="text" name="email" th:value="${userPart.email}" onchange="changeValue(this)" required></td>
+				</tr>					
+				<tr>
+					<td> Phone Number: </td>
+					<td><input type="text" name="phone_no" th:value="${userPart.phone_no}" onchange="changeValue(this)" required></td>
+				</tr>
+				<tr>
+					<td> ID Type: </td>
+					<td>
+						<select name="id_type" class="form-control" onchange="changeValue(this)" required>
+							<option value=""> Select an ID Type </option>
+							<option value="P" th:selected="(${custPart.id_type}=='P')"> Passport </option>
+							<option value="S" th:selected="(${custPart.id_type}=='S')"> SSN </option>	
+							<option value="D" th:selected="(${custPart.id_type}=='D')"> Driver License </option>						
+						</select></td>
+				</tr>	
+				<tr>
+					<td> ID No: </td>
+					<td><input type="text" name="id_no" th:value="${custPart.id_no}" onchange="changeValue(this)" required></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="hidden" name="pwd" th:value="${userPart.pwd}" required></td>
+				</tr>	
+				<tr>
+					<td></td>
+					<td><input type="hidden" name="salt" th:value="${userPart.salt}" required></td>
+				</tr>
+				
+																	
+				<tr>
+				<td></td>
+					<td><button value="Update Information" formaction="/uptCustProfile" class="btn btn-outline-success"> Update Information </button></td>
+				</tr>
+				<tr>
+					<p th:text="${submit_res}" style="color:red"></p>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<br><br><br>
+<a href="/customerHome"><button  class="btn btn-outline-danger">back</button></a> 
+<a href="/customerHome"><button class="btn btn-outline-primary">Home</button></a> 
+</body>
+</html>
+    <script type="text/javascript">
+        function changeValue(obj){
+            $(obj).attr("value",$(obj).val());
+        }
+    </script>

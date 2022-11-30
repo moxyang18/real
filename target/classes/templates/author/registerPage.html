@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> 
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<meta charset="ISO-8859-1">
+<title>Author Register</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<style>
+#div{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:100px;
+}
+body {
+  background-image: url("https://cdn.mos.cms.futurecdn.net/S463HbXSHA4zUhoENDSheb.jpg");
+  background-position: center;
+  background-repeat: repeat-Y;
+  background-size: cover;
+}
+</style>
+</head>
+<body class="container-fluid">
+	<div class="card" id="div">
+		<h2 class="card-header text-center bg-danger text-light"> Author Register </h2>
+		<form method="POST" action="/regAuthor">
+			<table class="table table-hover table-striped">
+				<tr>
+					<td> Enter Username: </td>
+					<td><input type="text" name="username" th:value="${username}" required></td>
+				</tr>
+				<tr>
+					<td> Enter Password: </td>
+					<td><input type="text" name="pwd" th:value="${pwd}" required></td>
+				</tr>						
+				<tr>
+					<td> Enter First Name: </td>
+					<td><input type="text" name="fname" th:value="${fname}" required></td>
+				</tr>					
+				<tr>
+					<td> Enter Last Name: </td>
+					<td><input type="text" name="lname" th:value="${lname}" required></td>
+				</tr>					
+				<tr>
+					<td> Enter Email: </td>
+					<td><input type="text" name="email" th:value="${email}" required></td>
+				</tr>					
+				<tr>
+					<td> Enter Phone Number: </td>
+					<td><input type="text" name="phone_no" th:value="${phone_no}" required></td>
+				</tr>
+				<tr>
+					<td> Enter Street: </td>
+					<td><input type="text" name="street" th:value="${street}" required></td>
+				</tr>				
+				<tr>
+					<td> Enter City: </td>
+					<td><input type="text" name="city" th:value="${city}" required></td>
+				</tr>	
+				<tr>
+					<td> Enter State: </td>
+					<td><input type="text" name="state" th:value="${state}" required></td>
+				</tr>	
+				<tr>
+					<td> Enter Country: </td>
+					<td><input type="text" name="country" th:value="${country}" required></td>
+				</tr>
+				<tr>
+					<td> Enter Zipcode: </td>
+					<td><input type="text" name="zipcode" th:value="${zipcode}" required></td>
+				</tr>	
+				<tr>
+					<td> Enter pen_name: </td>
+					<td><input type="text" name="pen_name" th:value="${pen_name}" required></td>
+				</tr>																																
+				<tr>
+				<td></td>
+					<td><input type="submit" value="Register" class="btn btn-outline-success"></td>
+				</tr>
+				<tr>
+					<p th:text="${submit_res}" style="color:red"></p>
+				</tr>
+			</table>
+		</form>
+	</div>
+<a href="/login"><button  class="btn btn-danger">back</button></a> 
+<a href="/index"><button class="btn btn-outline-primary">Home</button></a> 
+</body>
+</html>

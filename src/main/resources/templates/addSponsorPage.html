@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<meta charset="ISO-8859-1">
+<title></title>
+<style>
+#div{
+	width:600px;
+	height:500px;
+	margin:auto;
+	margin-top:100px;
+}
+body {
+  background-image: url("https://earthsky.org/upl/2022/08/Milky-Way-Amr-Abdulwahab-western-desert-of-Egypt-July-8-2022-e1661981704464.jpg");
+  background-position: center;
+  background-repeat: repeat-Y;
+  background-size: cover;
+}
+</style>
+</head>
+<body class="container-fluid">
+	<div class="card" id="div">
+		<h2 class="card-header text-center bg-danger text-light"> Add a New Sponsor Here </h2>
+		<form method="POST" action="/addSponsor">
+			<table class="table table-hover table-striped">
+				<tr>
+					<td>Enter New Sponsor First Name: </td>
+					<td><input type="text" name="fname"></td>
+				</tr>
+				<tr>
+					<td>Enter New Sponsor Last Name: </td>
+					<td><input type="text" name="lname"></td>
+				</tr>				
+				<tr>
+					<td><input type="submit" value="insert" class="btn btn-outline-success"></td>
+					<td><input type="reset" value="clear" class="btn btn-outline-danger"></td>
+				</tr>
+				<tr>
+					<p th:text="${submit_res}" style="color:red"></p>
+				</tr>
+			</table>
+		</form>
+	</div>
+<a href="/sponsorList"><button  class="btn btn-outline-danger">back</button></a> 
+<a href="/index"><button class="btn btn-outline-primary">Home</button></a> 
+</body>
+</html>

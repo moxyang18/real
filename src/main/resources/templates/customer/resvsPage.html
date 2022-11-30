@@ -1,0 +1,38 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Reservation List</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<style>
+#div{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:100px;
+}
+body {
+  background-image: url("https://cdn.mos.cms.futurecdn.net/S463HbXSHA4zUhoENDSheb.jpg");
+  background-position: center;
+  background-repeat: repeat-Y;
+  background-size: cover;
+}
+</style></head><body class="container-fluid">    
+<a href="/toMakeOwnResv"><button class="btn btn-danger">Make a Reservation</button></a>    
+<div  class="card" id="div" align="center">        
+<table class="table table-hover table-striped">            
+<tr>                
+<th class="card-header text-center bg-danger text-light">Resv No</th>                
+<th class="card-header text-center bg-primary text-light">Resv Date</th> 
+<th class="card-header text-center bg-secondary text-light">Time Slot</th> 
+<th class="card-header text-center bg-warning text-light">Customer Id</th> 
+<th class="card-header text-center bg-info text-light">Room Id</th>                         
+</tr>            
+<tr th:each="resv:${resvList}">                
+<td align="center" th:text="${resv.resv_no}"></td>                
+<td align="center" th:text="${resv.resv_date}"></td>
+<td align="center" th:text="${resv.time_slot}"></td>   
+<td align="center" th:text="${resv.UID}"></td>
+<td align="center" th:text="${resv.room_id}"></td>                     
+</tr>       
+ </table>    
+ </div>
+ 
+ <a href="/customerHome"><button class="btn btn-primary">Home</button></a> 
+ </body></html>

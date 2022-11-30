@@ -1,0 +1,103 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Author Gallery</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<style>
+#div{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:50px;
+}
+#opForm{
+	background-color: coral;
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:20px;
+}
+#result{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:10px;
+}
+body {
+  background-image: url("https://images.theconversation.com/files/223729/original/file-20180619-126566-1jxjod2.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=675.0&fit=crop");
+  background-position: center;
+  background-repeat: repeat-y;
+  background-size: cover;
+}
+</style>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> 
+ <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+function showOp(){
+	$("#opForm").show();
+}
+</script>
+</head><body class="container-fluid">    
+<button class="btn btn-primary" onclick="showOp()">Operation</button>
+<br> <br>
+<div  class="card" id="opForm" align="center" style="display:none"> 
+<form>
+Author Id:   <input type="text" name="uid"/>  <br><br>
+First Name:<input type="text" name="fname"/>  <br><br>
+Last Name:<input type="text" name="lname"/>  <br><br>
+Pen Name:<input type="text" name="pen_name"/>  <br><br>
+<input type="hidden" id="role" name="role" th:value="${role}"/>
+<button id="searchBtn" value="Search" formaction="/queryAuthor" class="btn btn-outline-secondary"> Search </button>
+<button id="addBtn" value="Insert" formaction="/enterAuthor" class="btn btn-outline-secondary"> Add </button>
+</form>
+</div> 
+<p th:text="${submit_res}" style="color:red"></p>
+
+<div  class="card" id="div" align="center">       
+<table class="table table-hover table-striped">            
+<tr>                
+<th class="card-header text-center bg-danger text-light">Author Id</th>                
+<th class="card-header text-center bg-primary text-light">First Name</th>     
+<th class="card-header text-center bg-info text-light">Last Name</th> 
+<th class="card-header text-center bg-secondary text-light">Pen Name</th>                       
+</tr>         
+<tr th:each="auth,iterStat:${authList}">                
+<td align="center" th:text="${auth.uid}"></td>                
+<td align="center" th:text="${userList[iterStat.index].fname}"></td>     
+<td align="center" th:text="${userList[iterStat.index].lname}"></td>               
+<td align="center" th:text="${auth.pen_name}"></td>                        
+</tr>    
+ </table>    
+ </div>
+ 
+ <a id = "homeButton" href="/index"><button class="btn btn-info" >Home</button></a>    
+  <a href="/logout"><button class="btn btn-danger">Logout</button></a>                                    
+ </body>
+ 
+ <script>
+
+if($("#role").val()=="STAFF") {
+	$("#searchBtn").show();
+	$("#delBtn").show();
+	$("#addBtn").show();
+} else {
+	$("#searchBtn").show();
+	$("#delBtn").hide();
+	$("#addBtn").hide();
+}
+
+</script>
+<script type="text/javascript">
+
+var role = document.getElementById("role").value;
+    if (role == "AUTHOR") { // use == to compare value
+        document.getElementById("homeButton").href="/authorHome"; 
+    } else if (role == "CUSTOMER"){
+        document.getElementById("homeButton").href="/customerHome";
+    } else if (role == "ADMIN"){
+    	document.getElementById("homeButton").href="/adminHome";
+    } else if (role == "STAFF"){
+    	document.getElementById("homeButton").href="/empHome";
+    }
+</script>
+
+
+ 

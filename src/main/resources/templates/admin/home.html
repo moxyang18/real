@@ -1,0 +1,32 @@
+<!DOCTYPE html><html xmlns="http://www.thymeleaf.org">
+<head><meta charset="UTF-8">
+<title>Admin Home</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<style>
+#div{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:100px;
+}
+body {
+  background-image: url("https://i.natgeofe.com/n/3a57e30f-6b0a-444c-9b20-8bf481ee1793/01-milky-way-NationalGeographic_1959323_4x3.jpg");
+  background-position: center;
+  background-repeat: repeat-Y;
+  background-size: cover;
+}
+</style>
+</head>
+<body>   Welcome to Admin Home!
+<br><br>
+<div align="center" id="div">
+<a href="/employeesList"><button class="btn bg-danger text-light">Employee Management</button></a> 
+<a href="/usersList"><button class="btn bg-primary text-light">User Management</button></a> 
+
+
+
+<a href="/logout"><button class="btn btn-danger">Logout</button></a>
+</div>
+
+</body>
+</html>

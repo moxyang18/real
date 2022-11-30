@@ -1,0 +1,90 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Customer Invoice Records</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<style>
+#div{
+	width:auto;
+	height:auto;
+	margin:auto;
+	margin-top:50px;
+}
+#opForm{
+	background-color: coral;
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:20px;
+}
+#result{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:10px;
+}
+body {
+  background-image: url("https://static.scientificamerican.com/sciam/cache/file/B73C6A04-9155-44EC-B80AA2B5E9E62508.jpg");
+  background-position: center;
+  background-repeat: repeat-Y;
+  background-size: cover;
+}
+</style>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> 
+ <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+function showOp(){
+	$("#opForm").show();
+}
+</script>
+</head><body class="container-fluid">    
+<button class="btn btn-primary" onclick="showOp()">Operation</button>
+<br> <br>
+<div  class="card" id="opForm" align="center" style="display:none"> 
+<form>
+Invoice ID: <input type="text" name="invoice_id"/>  <br><br>
+Rental ID:   <input type="text" name="rental_id"/>  <br><br>
+Invoice Amt:   <input type="text" name="invoice_amt"/>  <br><br>
+Invoice Date:   <input type="text" name="invoice_date"/>  <br><br>
+Paid Status:   <input type="text" name="paid_status"/>  <br><br>
+Amt to Pay:   <input type="text" name="amt_to_pay"/>  <br><br>
+Copy ID:<input type="text" name="copyId"/>  <br><br>
+Customer ID:<input type="text" name="custId"/>  <br><br>
+<button id="searchBtn" value="Search" formaction="/qryInvoices" class="btn btn-outline-secondary"> Search </button>
+</form>
+</div> 
+<p th:text="${submit_res}" style="color:red"></p>
+
+<div  class="card" id="div" align="center">       
+<table class="table table-hover table-striped">            
+<tr>                
+<th class="card-header text-center bg-danger text-light">Invoice ID</th>                
+<th class="card-header text-center bg-primary text-light">Rental ID</th>     
+<th class="card-header text-center bg-info text-light">Invoice Amt</th> 
+<th class="card-header text-center bg-secondary text-light">Invoice Date</th>  
+<th class="card-header text-center bg-danger text-light">Paid Status</th>                
+<th class="card-header text-center bg-primary text-light">Amt to Pay</th>     
+<th class="card-header text-center bg-info text-light">Copy Id</th> 
+<th class="card-header text-center bg-secondary text-light">Book Id</th>    
+<th class="card-header text-center bg-danger text-light">Book Name</th>   
+<th class="card-header text-center bg-danger text-light">Customer ID</th>                                   
+</tr>         
+<tr th:each="rec,iterStat:${invoiceList}">                
+<td align="center" th:text="${rec.invoice_id}"></td>    
+<td align="center" th:text="${rec.rental_id}"></td>  
+<td align="center" th:text="${rec.invoice_amt}"></td> 
+<td align="center" th:text="${rec.invoice_date}"></td> 
+<td align="center" th:text="${rec.paid_status}"></td> 
+<td align="center" th:text="${rec.amt_to_pay}"></td> 
+<td align="center" th:text="${copyList[iterStat.index].copy_id}"></td>                
+<td align="center" th:text="${bookList[iterStat.index].bid}"></td> 
+<td align="center" th:text="${bookList[iterStat.index].book_name}"></td> 
+<td align="center" th:text="${recList[iterStat.index].UID}"></td> 
+</tr>    
+ </table>    
+ </div>
+ 
+ <a id = "homeButton" href="/empHome"><button class="btn btn-primary">Home</button></a>    
+  <a href="/logout"><button class="btn btn-danger">Logout</button></a>                                    
+ </body>
+ 
+
+ 

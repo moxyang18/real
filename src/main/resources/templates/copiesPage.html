@@ -1,0 +1,139 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Book List</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<style>
+#div{
+	width:800px;
+	height:auto;
+	margin:auto;
+	margin-top:100px;
+}
+#opForm{
+	background-color: coral;
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:20px;
+}
+body {
+  background-image: url("https://www.travelandleisure.com/thmb/YsanesblBhPN7H53wooN4wNdaK4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/grand-prismatic-yellowstone-national-park-YELLOWSTONEFACTS0222-e004c4c1e068437c8972ea82858b7e53.jpg");
+  background-position: center;
+  background-repeat: repeat-Y;
+  background-size: cover;
+}
+</style>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> 
+ <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+</head>
+<body class="container-fluid">    
+<div id="copyAdd"><a href="/toAddCopy"><button class="btn btn-danger">Add New Copies</button></a>    </div>
+
+<script>
+function showOp(){
+	$("#opForm").show();
+}
+</script>
+
+<button onclick="showOp()" class="btn btn-info">Operation</button>
+<br> <br>
+<div  class="card" id="opForm" align="center" style="display:none"> 
+<form>
+Copy Id:   <input type="text" name="copy_id"/>  <br><br>
+Bid:   <input type="text" name="bid"/>  <br><br>
+Book Name:<input type="text" name="bookName"/>  <br><br>
+Author Id:   <input type="text" name="authId"/>  <br><br>
+Author:<input type="text" name="authPenName"/>  <br><br>
+
+<h6>Topic id: 
+
+<select class="form-control" name="topicId" style="width: 120px;"> 
+<option value="0">select topic</option>
+<option th:each="topic:${topicList}" th:value="${topic.topic_id}" th:text="${topic.topic_name}"></option>
+</select>
+</h6>  <br>
+
+
+Status:
+<div>
+<select name="status" class="form-control" id="selectList" style="width: 100px;"> 
+	<option value=""> Select </option>
+	<option value="Y"> Available </option>
+	<option value="N"> Borrowed </option>					
+</select>
+<br><br>
+</div>
+<input type="hidden" id="queryOnly" name="queryOnly" th:value="${queryOnly}"/>
+<input type="hidden" id="role" name="role" th:value="${role}"/>
+<button id="searchBtn" value="Search" formaction="/queryCopyListBy" class="btn btn-success"> Search </button>
+<button id="delBtn" value="Delete" formaction="/deleteCopy" class="btn btn-outline-secondary"> Delete </button>
+<button id="rentBtn" value="Rent the Copy" formaction="/rentCopy" class="btn btn-primary"> Rent the Copy </button>
+</form>
+</div> 
+<p th:text="${submit_res}" style="color:red"></p>
+<div  class="card" id="div" align="center">     
+<table class="table table-hover table-striped">            
+<tr>                
+<th class="card-header text-center bg-dark text-light">Copy Id</th>                
+<th class="card-header text-center bg-secondary text-light">Book Id</th>     
+<th class="card-header text-center bg-dark text-light">Book Name</th>  
+<th class="card-header text-center bg-secondary  text-light">Author Id</th> 
+<th class="card-header text-center bg-dark text-light">Author(Pen Name)</th>    
+<th class="card-header text-center bg-secondary  text-light">Topic Id</th>                
+<th class="card-header text-center bg-dark text-light">Topic Name</th>     
+<th class="card-header text-center bg-secondary  text-light">Status</th>                     
+</tr>            
+<tr th:each="copy, iter:${copyList}">                
+<td align="center" th:text="${copy.copy_id}"></td>                
+<td align="center" th:text="${copy.bid}"></td>     
+<td align="center" th:text="${bookList[iter.index].book_name}"></td>   
+<td align="center" th:text="${authList[iter.index].uid}"></td> 
+<td align="center" th:text="${authList[iter.index].pen_name}"></td>   
+<td align="center" th:text="${topicListLower[iter.index].topic_id}"></td> 
+<td align="center" th:text="${topicListLower[iter.index].topic_name}"></td>       
+<td align="center" th:text="(${copy.status}=='Y'?'Available':'Borrowed')"></td> 
+</tr>       
+ </table>    
+ </div>
+ 
+ <a id = "homeButton" href="/index"><button class="btn btn-primary">Home</button></a>    
+  <a href="/logout"><button class="btn btn-danger">Logout</button></a>   
+ </body>
+ 
+  <script>
+if($("#queryOnly").val()=="true") {
+	$("#searchBtn").show();
+	$("#delBtn").hide();
+	$("#addBtn").hide();
+} else {
+	$("#searchBtn").show();
+	$("#delBtn").show();
+	$("#addBtn").show();
+}
+
+if($("#role").val()=="STAFF") {
+	$("#copyAdd").show();
+	$("#delBtn").show();
+	$("#rentBtn").hide();
+} else {
+	$("#copyAdd").hide();
+	$("#delBtn").hide();
+	$("#rentBtn").show();
+}
+
+</script>
+ 
+ <script type="text/javascript">
+
+var role = document.getElementById("role").value;
+    if (role == "AUTHOR") { // use == to compare value
+        document.getElementById("homeButton").href="/authorHome"; 
+    } else if (role == "CUSTOMER"){
+        document.getElementById("homeButton").href="/customerHome";
+    } else if (role == "ADMIN"){
+    	document.getElementById("homeButton").href="/adminHome";
+    } else if (role == "STAFF"){
+    	document.getElementById("homeButton").href="/empHome";
+    }
+</script>
+ 

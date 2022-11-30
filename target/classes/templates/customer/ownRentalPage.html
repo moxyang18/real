@@ -1,0 +1,87 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Customer Rental Records</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<style>
+#div{
+	width:auto;
+	height:auto;
+	margin:auto;
+	margin-top:50px;
+}
+#opForm{
+	background-color: coral;
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:20px;
+}
+#result{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:10px;
+}
+body {
+  background-image: url("https://static.scientificamerican.com/sciam/cache/file/B73C6A04-9155-44EC-B80AA2B5E9E62508.jpg");
+  background-position: center;
+  background-repeat: repeat-Y;
+  background-size: cover;
+}
+</style>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> 
+ <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+function showOp(){
+	$("#opForm").show();
+}
+</script>
+</head><body class="container-fluid">    
+<button class="btn btn-primary" onclick="showOp()">Operation</button>
+<br> <br>
+<div  class="card" id="opForm" align="center" style="display:none"> 
+<form>
+Rental ID:   <input type="text" name="rental_id"/>  <br><br>
+Copy ID:<input type="text" name="copy_id"/>  <br><br>
+Book ID:<input type="text" name="bookId"/>  <br><br>
+Book Name:<input type="text" name="bookName"/>  <br><br>
+Borrowed Date:<input type="date" name="borrow_date"/>  <br><br>
+Expected RetDate:<input type="date" name="exp_ret_date"/>  <br><br>
+Actual RetDate:<input type="date" name="act_ret_date"/>  <br><br>
+Rental Status:<input type="text" name="rental_status"/>  <br><br>
+<button id="searchBtn" value="Search" formaction="/qryOwnRentalRecords" class="btn btn-outline-secondary"> Search </button>
+</form>
+</div> 
+<p th:text="${submit_res}" style="color:red"></p>
+
+<div  class="card" id="div" align="center">       
+<table class="table table-hover table-striped">            
+<tr>                
+<th class="card-header text-center bg-danger text-light">Rental ID</th>                
+<th class="card-header text-center bg-primary text-light">Copy ID</th>     
+<th class="card-header text-center bg-info text-light">Book ID</th> 
+<th class="card-header text-center bg-secondary text-light">Book Name</th>    
+<th class="card-header text-center bg-danger text-light">Borrowed Date</th>                
+<th class="card-header text-center bg-primary text-light">Expected RetDate</th>     
+<th class="card-header text-center bg-info text-light">Actual RetDate</th> 
+<th class="card-header text-center bg-secondary text-light">Rental Status</th>                   
+</tr>         
+<tr th:each="rec,iterStat:${recList}">                
+<td align="center" th:text="${rec.rental_id}"></td>    
+<td align="center" th:text="${rec.copy_id}"></td>  
+<td align="center" th:text="${bookList[iterStat.index].bid}"></td>                
+<td align="center" th:text="${bookList[iterStat.index].book_name}"></td> 
+<td align="center" th:text="${rec.borrow_date}"></td> 
+<td align="center" th:text="${rec.exp_ret_date}"></td> 
+<td align="center" th:text="${rec.act_ret_date}"></td> 
+<td align="center" th:text="${rec.rental_status}"></td>            
+                      
+</tr>    
+ </table>    
+ </div>
+ 
+ <a id = "homeButton" href="/customerHome"><button class="btn btn-primary">Home</button></a>    
+  <a href="/logout"><button class="btn btn-danger">Logout</button></a>                                    
+ </body>
+ 
+
+ 

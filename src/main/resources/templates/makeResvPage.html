@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function translateSlots(){
+	var select = document.getElementById("selectList");
+	for(var i = 0; i<select.length; i++) {
+		if(select.options[i].value==1) select.options[i].innerHTML = "8 AM to 10 AM";
+		else if(select.options[i].value==2) select.options[i].innerHTML = "11 AM to 1 PM";
+		else if(select.options[i].value==3) select.options[i].innerHTML = "1 PM to 3 PM";
+		else if(select.options[i].value==4) select.options[i].innerHTML = "4 PM to 6 PM";
+	}
+};
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> 
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+var dateTomorrow = new Date(); 
+dateTomorrow.setDate(dateTomorrow.getDate() + 1)
+$(function() {
+    $( "#datepicker" ).datepicker({
+        numberOfMonths: 3,
+        showButtonPanel: true,
+        minDate: dateTomorrow
+    });
+});
+</script>
+<meta charset="ISO-8859-1">
+<title></title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<meta charset="ISO-8859-1">
+<title></title>
+<style>
+#div{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:100px;
+}
+</style>
+</head>
+<body class="container-fluid">
+	<div class="card" id="div">
+		<h2 class="card-header text-center bg-danger text-light"> Make a New Study Room Reservation Here </h2>
+		<form method="POST" action="/makeResv">
+			<table class="table table-hover table-striped">
+				<tr>
+					<td> Customer ID: </td>
+					<td><input type="text" name="UID" th:value="${UID}"></td>
+				</tr>
+				<tr>
+					<td>Enter the Room You Reserve For: </td>
+					<td><input type="text" name="room_id" th:value="${room_id}"></td>
+				</tr>				
+				<tr>
+					<td>Enter the Date You Reserve For: </td>
+					<td><input type="text" id = "datepicker" name="resv_date" th:value="${resv_date}"></td>
+				</tr>	
+				<tr>
+ <!-- 					<td>Select the Available Slot You Want to Reserve: </td>
+					<td><select th:field="*{avai_slots}" name="time_slot">
+						<option>Select Time Slot</option>
+						<option th:each="slot: ${avai_slots}"></option>
+					</select>
+					</td>
+					 -->
+					 <td>
+					<select name="time_slot" class="form-control" id="selectList" onclick="translateSlots();">
+						<option value="0"> Select an Available Timeslot </option>
+						<option th:each="option : ${slot_options}" th:value="${option}" th:text="${option}"></option>						
+					</select>
+					</td>
+				</tr>				
+				<tr>
+					<td><input type="submit" value="insert" class="btn btn-outline-success"></td>
+					<td><button formaction="/fetchSlots" class="btn btn-outline-info" >Check Available Slots</button></td>
+					<td><input type="reset" value="clear" class="btn btn-outline-danger"></td>
+				</tr>
+				<tr>
+					<p th:text="${submit_res}" style="color:red"></p>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="hidden" id="queryOnly" name="queryOnly" th:value="${queryOnly}"/></td>
+					<td><input type="hidden" id="role" name="role" th:value="${role}"/></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+<a href="/resvList"><button  class="btn btn-outline-danger">back</button></a> 
+<a href="/index"><button class="btn btn-outline-primary">Home</button></a> 
+</body>
+</html>
+
+
+ <script>
+if($("#queryOnly").val()=="true") {
+	$("#searchBtn").show();
+	$("#delBtn").hide();
+	$("#addBtn").hide();
+} else {
+	$("#searchBtn").show();
+	$("#delBtn").show();
+	$("#addBtn").show();
+}
+
+if($("#role").val()=="STAFF") {
+	$("#searchBtn").show();
+	$("#delBtn").show();
+	$("#addBtn").show();
+} else {
+	$("#searchBtn").show();
+	$("#delBtn").hide();
+	$("#addBtn").hide();
+}
+
+</script>
+<script type="text/javascript">
+
+var role = document.getElementById("role").value;
+    if (role == "AUTHOR") { // use == to compare value
+        document.getElementById("homeButton").href="/authorHome"; 
+    } else if (role == "CUSTOMER"){
+        document.getElementById("homeButton").href="/customerHome";
+    } else if (role == "ADMIN"){
+    	document.getElementById("homeButton").href="/adminHome";
+    } else if (role == "STAFF"){
+    	document.getElementById("homeButton").href="/empHome";
+    }
+</script>

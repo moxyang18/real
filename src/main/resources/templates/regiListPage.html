@@ -1,0 +1,82 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Registration List</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<style>
+#div{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:50px;
+}
+#opForm{
+	background-color: coral;
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:20px;
+}
+#opForm2{
+	background-color: coral;
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:20px;
+}
+#result{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:10px;
+}
+body {
+  background-image: url("https://cdn.mos.cms.futurecdn.net/S463HbXSHA4zUhoENDSheb.jpg");
+  background-position: center;
+  background-repeat: repeat-Y;
+  background-size: cover;
+}
+</style>
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> 
+ <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+function showOp(){
+	$("#opForm").show();
+}
+</script>
+
+</head><body class="container-fluid">    
+<button onclick="showOp()" class="btn btn-secondary">Operation</button>
+<br> <br>
+<div  class="card" id="opForm" align="center" style="display:none"> 
+<form>
+<h6> Registration No:   <input type="text" name="reg_id"/></h6>  <br>
+<h6> Exhibition Id:   <input type="text" name="event_id"/></h6>  <br>
+<h6> Customer Id: <input type="text" name="UID" /></h6>  <br>
+
+<button id="QueryBtn" value="Search" formaction="/queryRegistration" class="btn btn-outline-secondary"> Search </button>
+<button id="AddBtn" value="Insert" formaction="/addRegistration" class="btn btn-outline-secondary"> Add </button>
+<button id="DelBtn" value="Delete" formaction="/delRegistration" class="btn btn-outline-secondary"> Delete </button>
+
+</form>
+</div> 
+
+<p th:text="${submit_res}" style="color:red"></p>
+
+<div  class="card" id="div" align="center">       
+<table class="table table-hover table-striped">            
+<tr> 
+<th class="card-header text-center bg-info text-light">Registration No</th>                   
+<th class="card-header text-center bg-danger text-light">Customer Id</th>                
+<th class="card-header text-center bg-primary text-light">Exhibition Id</th>                     
+</tr>         
+<tr th:each="registration:${regiList}">                
+<td align="center" th:text="${registration.reg_id}"></td> 
+<td align="center" th:text="${registration.UID}"></td>             
+<td align="center" th:text="${registration.event_id}"></td>                          
+</tr>    
+ </table>    
+ </div>
+ 
+ <a href="/empHome"><button class="btn btn-secondary">Home</button></a> 
+                                     
+ </body>

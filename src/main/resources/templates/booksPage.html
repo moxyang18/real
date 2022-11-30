@@ -1,0 +1,106 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Book List</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<style>
+#div{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:50px;
+}
+#opForm{
+	background-color: coral;
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:20px;
+}
+#result{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:10px;
+}
+body {
+  background-image: url("https://earthsky.org/upl/2022/08/Milky-Way-Amr-Abdulwahab-western-desert-of-Egypt-July-8-2022-e1661981704464.jpg");
+  background-position: center;
+  background-repeat: repeat-Y;
+  background-size: cover;
+}
+</style>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> 
+ <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+function showOp(){
+	$("#opForm").show();
+}
+</script>
+</head><body class="container-fluid">    
+<a href="/toAddBook"><button id="addBtn" class="btn btn-danger" >Add a New Book</button></a> 
+<button class="btn btn-primary" onclick="showOp()">Operation</button>
+<br> <br>
+<div  class="card" id="opForm" align="center" style="display:none"> 
+<form>
+Bid:   <input type="text" name="bid"/>  <br><br>
+Book Name:<input type="text" name="book_name"/>  <br><br>
+Topic Id:<input type="text" name="topic_id"/>  <br><br>
+Topic Name:<input type="text" name="topicName"/>  <br><br>
+<input type="hidden" id="queryOnly" name="queryOnly" th:value="${queryOnly}"/>
+<input type="hidden" id="role" name="role" th:value="${role}"/>
+<button id="searchBtn" value="Search" formaction="/queryBook" class="btn btn-outline-secondary"> Search </button>
+<button id="uptBtn" value="Update" formaction="/editBook" class="btn btn-outline-secondary"> Edit </button>
+<button id="delBtn" value="Delete" formaction="/deleteBook" class="btn btn-outline-secondary"> Delete </button>
+</form>
+</div> 
+<p th:text="${submit_res}" style="color:red"></p>
+
+<div  class="card" id="div" align="center">       
+<table class="table table-hover table-striped">            
+<tr>                
+<th class="card-header text-center bg-danger text-light">Book Id</th>                
+<th class="card-header text-center bg-primary text-light">Book Name</th>     
+<th class="card-header text-center bg-info text-light">Topic Id</th> 
+<th class="card-header text-center bg-secondary text-light">Topic Name</th>                       
+</tr>         
+<tr th:each="book,iterStat:${bookList}">                
+<td align="center" class="bid" id= "bid" th:text="${book.bid}"></td>                
+<td align="center" th:text="${book.book_name}"></td>                
+<td align="center" th:text="${book.topic_id}"></td>   
+<td align="center" th:text="${topicLowerList[iterStat.index].topic_name}"></td>                        
+</tr>    
+ </table>    
+ </div>
+ 
+ <a id = "homeButton" href="/index"><button class="btn btn-primary">Home</button></a>    
+  <a href="/logout"><button class="btn btn-danger">Logout</button></a>                                    
+ </body>
+ 
+ <script>
+if($("#queryOnly").val()=="true") {
+	$("#searchBtn").show();
+	$("#uptBtn").hide();
+	$("#delBtn").hide();
+	$("#addBtn").hide();
+} else {
+	$("#searchBtn").show();
+	$("#uptBtn").show();
+	$("#delBtn").show();
+	$("#addBtn").show();
+}
+</script>
+<script type="text/javascript">
+
+var role = document.getElementById("role").value;
+    if (role == "AUTHOR") { // use == to compare value
+        document.getElementById("homeButton").href="/authorHome"; 
+    } else if (role == "CUSTOMER"){
+        document.getElementById("homeButton").href="/customerHome";
+    } else if (role == "ADMIN"){
+    	document.getElementById("homeButton").href="/adminHome";
+    } else if (role == "STAFF"){
+    	document.getElementById("homeButton").href="/empHome";
+    }
+</script>
+
+
+ 

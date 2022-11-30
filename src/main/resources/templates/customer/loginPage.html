@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> 
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<meta charset="ISO-8859-1">
+<title>Customer Login</title>
+<style>
+#div{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:200px;
+}
+body {
+  background-image: url(" https://cdn.britannica.com/29/148329-050-269A9EFE/night-sky-Milky-Way-Galaxy.jpg");
+  background-position: center;
+  background-repeat: repeat-Y;
+  background-size: cover;
+}
+</style>
+
+</head>
+<body class="container-fluid">
+	<div class="card" id="div">
+		<h2 class="card-header text-center bg-danger text-light"> Customer Login </h2>
+		<form method="POST" action="/loginCustomer">
+			<table class="table table-hover table-striped">
+				<tr>
+					<td> Enter Username: </td>
+					<td><input type="text" name="username" th:value="${username}" required></td>
+				</tr>
+				<tr>
+					<td>Enter Password: </td>
+					<td><input type="text" name="pwd" th:value="${pwd}" required></td>
+				</tr>					
+				<tr>			
+				<tr>
+												<td ></td>	
+					<td><input type="submit" value="Login" class="btn btn-outline-success"></td>
+				</tr>
+				<tr>
+					<p th:text="${submit_res}" style="color:red"></p>
+				</tr>
+			</table>
+		</form>
+	</div>
+<a href="/login"><button  class="btn btn-primary">back</button></a> 
+</body>
+</html>

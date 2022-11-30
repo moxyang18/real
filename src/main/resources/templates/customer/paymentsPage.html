@@ -1,0 +1,86 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Customer Payment Records</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<style>
+#div{
+	width:auto;
+	height:auto;
+	margin:auto;
+	margin-top:50px;
+}
+#opForm{
+	background-color: coral;
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:20px;
+}
+#result{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:10px;
+}
+body {
+  background-image: url("https://static.scientificamerican.com/sciam/cache/file/B73C6A04-9155-44EC-B80AA2B5E9E62508.jpg");
+  background-position: center;
+  background-repeat: repeat-Y;
+  background-size: cover;
+}
+</style>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> 
+ <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+function showOp(){
+	$("#opForm").show();
+}
+</script>
+</head><body class="container-fluid">    
+<button class="btn btn-primary" onclick="showOp()">Operation</button>
+
+<br> <br>
+<div  class="card" id="opForm" align="center" style="display:none"> 
+<form>
+Payment ID: <input type="text" name="pid"/>  <br><br>
+Invoice ID:   <input type="text" name="invoice_id"/>  <br><br>
+Paid Amount:   <input type="text" name="paid_amt"/>  <br><br>
+Payment Method:   <input type="text" name="PAID_METHOD"/>  <br><br>
+Payment Date:   <input type="text" name="paid_date"/>  <br><br>
+CardHolder First Name:   <input type="text" name="card_hdr_fname"/>  <br><br>
+CardHolder Last Name:   <input type="text" name="card_hdr_lname"/>  <br><br>
+<button id="searchBtn" value="Search" formaction="/qryOwnPayments" class="btn btn-outline-secondary"> Search </button>
+</form>
+</div> 
+<p th:text="${submit_res}" style="color:red"></p>
+
+<div  class="card" id="div" align="center">       
+<table class="table table-hover table-striped">            
+<tr>                
+<th class="card-header text-center bg-danger text-light">Payment ID</th>                
+<th class="card-header text-center bg-primary text-light">Invoice ID</th>     
+<th class="card-header text-center bg-info text-light">Paid Amount</th> 
+<th class="card-header text-center bg-secondary text-light">Payment Method</th>  
+<th class="card-header text-center bg-danger text-light">Payment Date</th>                
+<th class="card-header text-center bg-primary text-light">CardHolder First Name</th>     
+<th class="card-header text-center bg-info text-light">CardHolder Last Name</th> 
+<th class="card-header text-center bg-secondary text-light">Customer ID</th>                                     
+</tr>         
+<tr th:each="rec,iterStat:${pmtList}">                
+<td align="center" th:text="${rec.pid}"></td>    
+<td align="center" th:text="${rec.invoice_id}"></td>  
+<td align="center" th:text="${rec.paid_amt}"></td> 
+<td align="center" th:text="${rec.PAID_METHOD}"></td> 
+<td align="center" th:text="${rec.paid_date}"></td> 
+<td align="center" th:text="${rec.card_hdr_fname}"></td> 
+<td align="center" th:text="${rec.card_hdr_lname}"></td>              
+<td align="center" th:text="${recList[iterStat.index].UID}"></td> 
+</tr>    
+ </table>    
+ </div>
+ 
+ <a id = "homeButton" href="/customerHome"><button class="btn btn-primary">Home</button></a>    
+  <a href="/logout"><button class="btn btn-danger">Logout</button></a>                                    
+ </body>
+ 
+
+ 
