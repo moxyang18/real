@@ -7,7 +7,7 @@ REAL is a web platform that allows staff to manage the library, and customers to
 ![real_customer](https://user-images.githubusercontent.com/46574160/204714635-56195ab2-abb4-4192-869b-3ded03104e77.png)
 ![real_author](https://user-images.githubusercontent.com/46574160/204714615-d58f4ee3-7d28-4266-8434-7065a44ba3a6.png)
 ![real_emp](https://user-images.githubusercontent.com/46574160/204714647-86be05b9-1c26-48a5-b701-877eacbd134d.png)
-![real_admin](https://user-images.githubusercontent.com/46574160/204714656-aa5762ba-bfaa-4bce-9ef9-6f0f36284aff.png)
+![real_admin](https://user-images.githubusercontent.com/46574160/204715412-1518c073-f9e8-49b4-8a8a-627aa5b80065.png)
 
 ## Built With
 
