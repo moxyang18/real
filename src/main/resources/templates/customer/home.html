@@ -1,6 +1,16 @@
 <!DOCTYPE html><html xmlns="http://www.thymeleaf.org">
 <head><meta charset="UTF-8">
 <title>Customer Home</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!-- FontAwesome CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <style>
 #div{
@@ -10,33 +20,456 @@
 	margin-top:100px;
 }
 body {
-  background-image: url("https://static.scientificamerican.com/sciam/cache/file/B73C6A04-9155-44EC-B80AA2B5E9E62508.jpg");
-  background-position: center;
-  background-repeat: repeat-Y;
+
+  background-image: url("https://img.freepik.com/premium-photo/book-stack-library-room-blurred-bookshelf-background_42691-514.jpg?w=2000");
+    background-image: url("https://static.scientificamerican.com/sciam/cache/file/B73C6A04-9155-44EC-B80AA2B5E9E62508.jpg");
+  background-repeat: repeat-y;
   background-size: cover;
+  position: absolute
 }
+        .navigation {
+            background-color: black;
+            height: 50px;
+        }
+        
+        .navigation>li {
+            display: inline-block;
+            position: relative;
+            padding: 10px;
+            height: 50px;
+            vertical-align: middle;
+        }
+        
+        .navigation>li>a {
+            text-decoration: none;
+            color: white;
+            padding: 15px;
+        }
+        
+        .navigation>li:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .navigation>li:hover>a {
+            color: black;
+        }
+                
+        .list_down {
+            display: none;
+            /*通过hover选择器来显示菜单，此处默认为隐藏*/
+            position: absolute;
+            /*使得下拉列表向下覆盖*/
+            list-style-type: none;
+            /*取消ul的样式*/
+            margin-top: 10px;
+            margin-left: -10px;
+            width: auto;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            /*添加阴影*/
+        }
+        
+        .list_down li {
+            display: block;
+            width: 240px;
+            background-color: rgba(255, 255, 255, 0.9)
+        }
+        
+        .list_down li:hover {
+            background-color: black;
+            /*鼠标悬停变色*/
+        }
+        
+        .list_down li:hover>a {
+            color: white;
+            /*鼠标悬停变色*/
+        }
+        
+        .list_right {
+            display: none;
+            /*通过hover选择器来显示菜单，此处默认为隐藏*/
+            position: absolute;
+            margin-left: 150px;
+            margin-top: -51px;
+            background-color: rgba(255, 255, 255, 0.9);
+            width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            /*添加阴影*/
+        }
+        
+        .list_right a,
+        .list_down li a {
+            display: block;
+            text-decoration: none;
+            color: black;
+            padding: 15px;
+        }
+        
+        .list_right a:hover {
+            background-color: black;
+            color: white;
+        }
+        
+        
+        .navigation .button1:hover .list_down {
+            display: block;
+        }
+        
+        .text {
+            margin: 20px;
+        }
+        
+        
+        
+        
+.section--news .box-news {
+    margin-bottom: 48px;
+    min-height: 86px;
+  }
+  
+  .section--background {
+    background: #f5f5f5;
+  }
+  
+  .section {
+    padding-top: 90px;
+    padding-bottom: 92px;
+    padding-left: 10px;
+    padding-right: 0px;
+    margin-left:40px;
+    margin-right:40px;
+    margin-bottom:40px;
+  }
+  
+  .pr-1,
+  .px-1 {
+    padding-right: 0.25rem;
+  }
+  
+  .h1,
+  h1 {
+    font-size: 1.8rem;
+    color: #1b75bc;
+    font-weight: 400;
+  }
+  
+  h2 {
+    font-size: 1.2rem;
+  }
+  
+  a {
+    font-size: 1rem;
+    color: #000;
+  }
+  
+  .section--news a.view {
+    text-decoration: underline;
+  }
+  
+  a:hover {
+    transition: all, .4s, ease;
+    text-decoration: none;
+  }
+  
+  a:hover h2 {
+    text-decoration: underline;
+  }
+  
+  a:hover p {
+    color: #000;
+  }
+  
+  .section--news .box-news p {
+    margin-bottom: 0;
+  }
+  
+  
+  /* Media Queries */
+  @media (min-width: 1230px) {
+    .section--news .container {
+      max-width: 1100px;
+    }
+  }        
+   
+   .grid-container {
+   
+   	display: grid;
+   	grid-template-columns: 1fr 1fr;
+   	grid-gap: 80px;
+   	margin-left: 40px;
+   	margin-right: 40px;
+   	    margin-bottom:10px;
+   }
+   
+    img {
+    max-width: 100%;
+    max-height: 100%;
+    margin-left: 10px;
+}    
+	.row_div {
+		width: 80%;
+		float: left
+	}
+	.sub_title {
+	text-align: center;}
+	
+	.sub_view {
+	text-align: right;}
 </style>
 </head>
-<body>   Welcome to Customer Home!
+<body>  
+
+
+    <ul class="navigation">
+        
+        <li class="button1"><a href="#">Galleries▾</a>
+            <ul class="list_down">
+                <li><a href="/bookList">Book Gallery</a>
+                </li>
+                <li><a href="/authBookList">Work Gallery</a></li>
+                <li><a href="/authList">Author Gallery</a></li>
+            </ul>
+        </li>
+        <li class="button1"><a href="#">Rental Service▾</a>
+              <ul class="list_down">
+              
+                <li><a href="/copyList">View/Rent a Copy</a></li>
+                <li><a href="/ownRentalRecords">Rental History</a></li>
+            </ul>      
+        </li>
+         <li class="button1"><a href="#">Payment Management▾</a>
+              <ul class="list_down">
+                <li><a href="/ownInvoices">Invoice/Make a Payment</a></li>
+                <li><a href="/ownPayments">Payment History</a></li>               
+            </ul>      
+        </li>       
+        <li class="button1"><a href="#">Exhibition Service▾</a>
+              <ul class="list_down">
+                <li><a href="/futureExhibitions">View/Register an Exhibition</a></li>
+                <li><a href="/viewOwnRegistration">Manage My Registration</a></li>
+            </ul>      
+        </li>               
+        <li class="button1"><a href="#">Study Room Reservation▾</a>
+              <ul class="list_down">
+                <li><a href="/ownResvList">Reservation History</a></li>
+                 <li><a href="/toMakeOwnResv">Make/Cancel a Reservation</a></li>
+            </ul>      
+        </li>   
+        <li class="button1"><a href="#">Profile</a>
+              <ul class="list_down">
+                <li><a href="/custProfile">My Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>          
+        </li>      
+    </ul>
+
+
 <br><br>
+<div align="center" style="color:white;font-size: 20px;"> Welcome to Customer Home!</div>
+
+<br><br>
+
+<div class="grid-container">
+	<div class="grid-child section--background">
+	<br>
+            <h2 class="h1 mt-xl-n1 mb-4 mb-md-5 pb-2 sub_title">      News</h2>
+    
+            <div class="box-news">
+              <a aria-label="LunarXP Wins Space Innovator of the Year Award" href="#">
+                <div class="row">
+<div class="col-lg-3 col-4 pr-1">
+<image src="https://s3.amazonaws.com/nyulibraries-www-assets/locations-images/bern-dibner-library.jpg"></image></div>
+                  <div class="col-lg-9 col-8">
+                    <h2>West Wing of 2nd Floor is Under Construction </h2>
+                    <p>December 10, 2022</p>
+                  </div> 
+                </div>
+              </a>
+            </div>
+    		<br>
+            <div class="box-news">
+              <a aria-label="New Spending Bill Expands Funding for Space Exploration" href="https://www.nytimes.com/2022/11/30/nyregion/nyu-engineering-downtown-brooklyn.html">
+                <div class="row">
+                  <div class="col-lg-3 col-4 pr-1">
+                  
+                  <image src="https://engineering.nyu.edu/sites/default/files/styles/content_header_default_1x/public/2018-12/b589aea2-54a0-4fc5-8952-b07a93a4e652.jpg?h=8815feae&itok=vyuzK8ZK"></image>              
+                  </div>
+                  <div class="col-lg-9 col-8">
+                    <h2>NYU Putting $1 Billion Into Its Engineering School in Brooklyn</h2>
+                    <p>December 1, 2022 </p>
+                  </div>
+                </div>
+              </a>
+            </div>
+    		<br>
+            <div class="box-news">
+              <a aria-label="LunarXP Sets Target for First Mars Landing in 2030" href="#">
+                <div class="row">
+                  <div class="col-lg-3 col-4 pr-1">
+                  <image src="https://c.tadst.com/gfx/900x506/istock-493559502.jpg"></image>              
+           
+                  </div>
+                  <div class="col-lg-9 col-8">
+                    <h2>Christmas Exhibition Series Coming to Our Library</h2>
+                    <p>November 28, 2022</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+    
+            <div class="col-lg-9 offset-lg-3 col-md-8 offset-md-4 col-7 offset-4 sub_view ">
+              <a href="#" class="view">View All</a>
+            </div>
+            <br>
+          
+	</div>
+	<div class="grid-child section--background">
+	<br>
+            <h2 class="h1 mt-xl-n1 mb-4 mb-md-5 pb-2 sub_title">Location and Hours</h2>
+            <div class="box-news">
+            
+                <div class="row">
+                
+<div class="col-lg-3 col-4 pr-1">
+
+<img src="https://burst.shopifycdn.com/photos/library-stunning-architecture.jpg?width=1200&format=pjpg&exif=1&iptc=1" />
+
+</div>
+
+                  <div class="col-lg-9 col-8">
+                    <h2> Location: <br><br>
+726 Broadway, 
+New York, NY 10003 </h2>
+                  </div> 
+                </div>
+            </div>
+    		<br>
+            <div class="box-news">
+                <div class="row">
+                  <div class="col-lg-3 col-4 pr-1">
+                   </div>
+                  <div class="col-lg-9 col-8">
+                    <h2>Hours: <br><br> Monday-Friday: 9am-10pm (in-person services close at 8pm)</h2>
+                  </div>
+                </div>
+            </div>
+    		<br>
+            <div class="box-news">
+                <div class="row">
+                  <div class="col-lg-3 col-4 pr-1">         
+           
+                  </div>
+                  <div class="col-lg-9 col-8">
+                    <h2>Saturday & Sunday: 9am-8pm (in-person services close at 5pm)</h2>
+                  </div>
+                </div>
+            </div>
+   
+            <br>	
+
+
+	</div>
+
+</div>
+
+
+<br> 
+
+<div class="grid-container">
+	<div class="grid-child section--background">
+	<br>
+            <h2 class="h1 mt-xl-n1 mb-4 mb-md-5 pb-2 sub_title">TO-DO List</h2>
+            <div class="box-news">
+            
+                <div class="row">
+                
+<div class="col-lg-3 col-4 pr-1">
+
+
+</div>
+
+                  <div class="col-lg-9 col-8">
+                    <h2> <br><br>
+
+
+</h2>
+                  </div> 
+                </div>
+            </div>
+    		<br>
+            <div class="box-news">
+                <div class="row">
+                  <div class="col-lg-3 col-4 pr-1">
+                   </div>
+                  <div class="col-lg-9 col-8">
+                    <h2><br>  <br><br>
+</h2>
+                  </div>
+                </div>
+            </div>
+    		<br>
+
+   
+            <br>	
+            <div class="col-lg-9 offset-lg-3 col-md-8 offset-md-4 col-7 offset-4 sub_view ">
+              <a href="#" class="view">View All</a>
+            </div>
+
+	</div>
+	<div class="grid-child section--background">
+	<br>
+            <h2 class="h1 mt-xl-n1 mb-4 mb-md-5 pb-2 sub_title">Contact Us</h2>
+            <div class="box-news">
+            
+                <div class="row">
+                
+<div class="col-lg-3 col-4 pr-1">
+
+<img src="https://burst.shopifycdn.com/photos/library-stunning-architecture.jpg?width=1200&format=pjpg&exif=1&iptc=1" />
+
+</div>
+
+                  <div class="col-lg-9 col-8">
+                    <h2> Email: <br><br>contact@real.com
+</h2>
+                  </div> 
+                </div>
+            </div>
+    		<br>
+            <div class="box-news">
+                <div class="row">
+                  <div class="col-lg-3 col-4 pr-1">
+                   </div>
+                  <div class="col-lg-9 col-8">
+                    <h2><br> Phone: <br><br>
+
+(646) 997-3456 (Front Desk Support Available at Library Hours)</h2>
+                  </div>
+                </div>
+            </div>
+    		<br>
+            <br>	
+	</div>
+</div>
+<!--
 <div align="center" id="div">
-<a href="/bookList"><button class="btn bg-danger text-light">Book Gallery</button></a> <br><br>
-<a href="/authBookList"><button class="btn bg-primary text-light">Work Gallery</button></a> <br><br> 
+<a href="/bookList"><button class="btn bg-primary text-light">Book Gallery</button></a> 
+<a href="/authBookList"><button class="btn bg-primary text-light">Work Gallery</button></a> 
 <a href="/authList"><button class="btn bg-primary text-light">Author Gallery</button></a> <br><br> 
-<a href="/copyList"><button class="btn bg-info text-light">Copy Rental Service</button></a> <br><br> 
-<a href="/ownRentalRecords"><button class="btn bg-success text-light">Rental History</button></a> <br><br> 
-<a href="/ownInvoices"><button class="btn bg-success text-light">Invoice Payment Service</button></a> <br><br> 
-<a href="/ownPayments"><button class="btn bg-warning text-light">Payment History</button></a> <br><br> 
+<a href="/copyList"><button class="btn bg-danger text-light">Copy Rental Service</button></a> 
+<a href="/ownRentalRecords"><button class="btn bg-danger text-light">Rental History</button></a> <br><br> 
+
+<a href="/ownInvoices"><button class="btn bg-success text-light">Invoice Payment Service</button></a> 
+<a href="/ownPayments"><button class="btn bg-success text-light">Payment History</button></a> <br><br> 
 
 
 <a href="/futureExhibitions"><button class="btn bg-info text-light">Exhibition</button></a> <br><br>
 <a href="/viewOwnRegistration"><button class="btn bg-dark text-light">Exhibition Registration</button></a> <br><br> 
 
-<a href="/ownResvList"><button class="btn bg-success text-light">Study Room Reservation</button></a> <br><br>
+<a href="/ownResvList"><button class="btn bg-warning text-light">Study Room Reservation</button></a> <br><br>
 
 <a href="/custProfile"><button class="btn bg-secondary text-light">Profile</button></a> <br><br> 
 <a href="/logout"><button class="btn btn-outline-danger">Logout</button></a> <br><br>
 </div>
-
+  -->
 </body>
 </html>

@@ -13,7 +13,39 @@ body {
   background-repeat: repeat-Y;
   background-size: cover;
 }
-</style></head><body class="container-fluid">      
+#opForm{
+	background-color: coral;
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:20px;
+}
+</style>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> 
+ <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+function showOp(){
+	$("#opForm").show();
+}
+
+</script>
+</head><body class="container-fluid">  
+
+<button class="btn btn-primary" onclick="showOp()">Operation</button>
+
+<br> <br>
+<div  class="card" id="opForm" align="center" style="display:none"> 
+<form>
+Reservation NO: <input type="text" name="resv_no"/>  <br><br>
+Reservation Date:   <input type="text" name="resv_date"/>  <br><br>
+Time Slot:   <input type="text" name="time_slot"/>  <br><br>
+Room Id:   <input type="text" name="room_id"/>  <br><br>
+Customer Id: <input type="text" name="UID"/>  <br><br>
+<button id="searchBtn" value="Search" formaction="/queryResvList" class="btn btn-outline-secondary"> Search </button>
+</form>
+</div> 
+
 <div  class="card" id="div" align="center">        
 <table class="table table-hover table-striped">            
 <tr>                

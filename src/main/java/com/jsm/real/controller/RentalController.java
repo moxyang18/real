@@ -173,6 +173,16 @@ public class RentalController extends BaseController {
 		rec.setRental_status('B');
 		recService.genRentalRec(rec);
 		model.addAttribute("submit_res", "The copy was successfully checked out!");
+		// populate to view
+		List<RentalRecord> recParts = new ArrayList<>();
+		List<Copy> copyParts = new ArrayList<>();
+		List<Book> bookParts = new ArrayList<>();
+		rec = new RentalRecord();
+		rec.setUID(this.getUidFromSession(session));
+		recService.qryRentalRecordsBy(rec, null, null, recParts, copyParts, bookParts);
+		model.addAttribute("recList", recParts);
+		model.addAttribute("copyList", copyParts);
+		model.addAttribute("bookList", bookParts);
 		return "customer/ownRentalPage";
 	}
 	
@@ -258,7 +268,8 @@ public class RentalController extends BaseController {
 		newInvoice.setRental_id(newRecId);
 		invoiceService.saveInvoice(newInvoice);
 		model.addAttribute("submit_res", "The copy was successfully returned!");
-		return "customer/ownRentalPage";
+		//return "customer/ownRentalPage";
+		return "employee/rentalRecsPage";
 	}
 	
 	

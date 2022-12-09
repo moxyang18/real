@@ -197,22 +197,22 @@ public class UserServiceImpl implements UserService {
 			sb.append("uid = " + author.getUid() + " and ");
 		}
 		if(author.getCity()!=null&&author.getCity().trim()!="") {
-			sb.append("city LIKE = '" + author.getCity().trim() + "%' and ");
+			sb.append("city LIKE '" + author.getCity().trim() + "%' and ");
 		}
 		if(author.getState()!=null&&author.getState().trim()!="") {
-			sb.append("state LIKE = '" +  author.getState().trim() + "%' and ");
+			sb.append("state LIKE '" +  author.getState().trim() + "%' and ");
 		}
 		if(author.getStreet()!=null&&author.getStreet().trim()!="") {
-			sb.append("street LIKE = '" + author.getStreet().trim() + "%' and ");
+			sb.append("street LIKE '" + author.getStreet().trim() + "%' and ");
 		}
 		if(author.getCountry()!=null&&author.getCountry().trim()!="") {
-			sb.append("country LIKE = '" + author.getCountry().trim() + "%' and ");
+			sb.append("country LIKE '" + author.getCountry().trim() + "%' and ");
 		}
 		if(author.getPen_name()!=null&&author.getPen_name().trim()!="") {
-			sb.append("pen_name LIKE = '" + author.getPen_name().trim() + "%' and ");
+			sb.append("pen_name LIKE '" + author.getPen_name().trim() + "%' and ");
 		}
 		if(author.getZipcode()!=null&&author.getZipcode().trim()!="") {
-			sb.append("zipcode LIKE = '" + author.getZipcode().trim() + "%' and ");
+			sb.append("zipcode LIKE '" + author.getZipcode().trim() + "%' and ");
 		}
 		sb.append("1 = 1");
 		List<Author> res = session.createQuery(sb.toString(), Author.class).getResultList();

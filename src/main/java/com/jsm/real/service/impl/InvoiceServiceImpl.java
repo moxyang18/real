@@ -75,7 +75,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 			sb.append("t0.invoice_amt = " + invoice.getInvoice_amt() + " and ");
 		}
 		if(invoice!=null&&invoice.getInvoice_date()!=null) {
-			sb.append("t0.invice_date = '" + invoice.getInvoice_date() + "' and ");
+			sb.append("t0.invoice_date = '" + invoice.getInvoice_date() + "' and ");
 		}
 		if(invoice!=null&&invoice.getInvoice_id()!=null) {
 			sb.append("t0.invoice_id = " + invoice.getInvoice_id() + " and ");

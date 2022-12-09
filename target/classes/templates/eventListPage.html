@@ -2,7 +2,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <style>
 #div{
-	width:600px;
+	width:1000px;
 	height:auto;
 	margin:auto;
 	margin-top:50px;
@@ -95,7 +95,7 @@ $(function() {
             
 <h6>StopDatetime: <input type="datetime-local" name="stop_datetime" id="stop_datetime"></h6> <br>
 
-<h6>Topic id: 
+<h6>Topic: 
 
 <select class="form-control" name="topic_id" style="width: 120px;"> 
 <option value="0">select topic</option>
@@ -181,15 +181,19 @@ Seminar Capacity:<input type="text" name="expense"/>  <br><br>
 <th class="card-header text-center bg-primary text-light">Event Type</th> 
 <th class="card-header text-center bg-secondary text-light">StartDatetime</th> 
 <th class="card-header text-center bg-secondary text-light">StopDatetime</th>     
-<th class="card-header text-center bg-info text-light">Topic Id</th>                        
+<th class="card-header text-center bg-info text-light">Topic Id</th>     
+<th class="card-header text-center bg-info text-light">Topic Name</th>                      
 </tr>         
 <tr th:each="event:${eventList}">                
 <td align="center" class="bid" id= "bid" th:text="${event.event_id}"></td>                
 <td align="center" th:text="${event.event_name}"></td>    
 <td align="center" th:text="${event.event_type}"></td> 
-<td align="center" th:text="${event.start_datetime}"></td> 
-<td align="center" th:text="${event.stop_datetime}"></td>             
-<td align="center" th:text="${event.topic_id}"></td>                          
+<td align="center" th:text="${#strings.substring(event.start_datetime, 0, #strings.length(event.start_datetime)-5)}"></td> 
+
+
+<td align="center" th:text="${#strings.substring(event.stop_datetime, 0, #strings.length(event.stop_datetime)-5)}"></td>             
+<td align="center" th:text="${event.topic_id}"></td>    
+<td align="center" th:text="${topicList[event.topic_id-1].topic_name}"></td>                       
 </tr>    
  </table>    
  </div>

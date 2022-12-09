@@ -136,12 +136,18 @@ public class PaymentController extends BaseController {
 		model.addAttribute("card_hdr_lname", pmt.getCard_hdr_lname());
 		
 		// validate the input
-		if(pmt.getCard_hdr_fname().equals("")||pmt.getCard_hdr_lname().equals("")||
-				pmt.getInvoice_id()==null||pmt.getPaid_amt()==null||
+		if(pmt.getInvoice_id()==null||pmt.getPaid_amt()==null||
 				pmt.getPAID_METHOD()==null||pmt.getPAID_METHOD()=='0') {
-			model.addAttribute("submit_res", "Please Specify are required payment information!");
+			model.addAttribute("submit_res", "Please Specify all required payment information!");
 			return "customer/invoicesPage";
 		}	
+		// if the the payment method is credit card and we do not specify the card holder name
+		if((pmt.getPAID_METHOD()=='2'||pmt.getPAID_METHOD()=='3')&&(pmt.getCard_hdr_fname().equals("")||pmt.getCard_hdr_lname().equals(""))){
+			model.addAttribute("submit_res", "Please Specify card holder payment information!");
+			return "customer/invoicesPage";
+		}
+		
+		
 		// fetch the invoice information
 		Invoice storedData = invoiceService.getInvoiceById(pmt.getInvoice_id());
 		// if the invoice is complete, or the payment amount is invalid, 

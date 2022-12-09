@@ -115,12 +115,43 @@ public class ReservationController extends BaseController {
 	
 	// query customer's own reservation list by filter
 	@RequestMapping("/queryOwnResvList")
-	public String queryOwnResvList(Model model, Reservation resv, HttpSession session) {
+	public String queryOwnResvList(Model model, ReservationMute resvMute, HttpSession session) {
 		// sanitize the input
+		Reservation resv = new Reservation();
+		if(StringUtils.sqlSanitize(resvMute.getResv_date()).equals("")) {
+			resv.setResv_date(null);
+		} else {
+			resv.setResv_date(StringUtils.toSqlDate(StringUtils.sqlSanitize(resvMute.getResv_date())));
+		}
+		resv.setResv_no(resvMute.getResv_no());
+		resv.setRoom_id(resvMute.getRoom_id());
+		resv.setTime_slot(resvMute.getTime_slot());
 		resv.setUID(this.getUidFromSession(session));
 		List<Reservation> resvList = resvService.getResvListBy(resv);
+		model.addAttribute("submit_res", "Quried reservation list!");
 		model.addAttribute("resvList", resvList);
 		return "customer/resvsPage";
+	}
+	
+	
+	// query customer's own reservation list by filter
+	@RequestMapping("/queryResvList")
+	public String queryResvList(Model model, ReservationMute resvMute, HttpSession session) {
+		// sanitize the input
+		Reservation resv = new Reservation();
+		if(StringUtils.sqlSanitize(resvMute.getResv_date()).equals("")) {
+			resv.setResv_date(null);
+		} else {
+			resv.setResv_date(StringUtils.toSqlDate(StringUtils.sqlSanitize(resvMute.getResv_date())));
+		}
+		resv.setResv_no(resvMute.getResv_no());
+		resv.setRoom_id(resvMute.getRoom_id());
+		resv.setTime_slot(resvMute.getTime_slot());
+		resv.setUID(resvMute.getUID());
+		List<Reservation> resvList = resvService.getResvListBy(resv);
+		model.addAttribute("submit_res", "Quried reservation list!");
+		model.addAttribute("resvList", resvList);
+		return "resvsPage";
 	}
 	
 	// delete a reservation that happens in the future date
@@ -132,19 +163,20 @@ public class ReservationController extends BaseController {
 		model.addAttribute("resvList", resvList);
 		if(resvMute.getResv_no()==null) {
 			model.addAttribute("submit_res", "Specify reservation number to cancel!");
-			return "customer/resvPage";
+			return "customer/resvsPage";
 		}
 		// CAN ONLY DELETE OWN RESERVATION that happens in the future
 		// so need to filter the record by the registration id, customer uid, and reservation date
 		if(!resvService.existsFutureResvByResvIdUid(resvMute.getResv_no(), this.getUidFromSession(session))) {
-			model.addAttribute("submit_res", "Unable to delete the reservation.");
-			return "customer/resvPage";
+			model.addAttribute("submit_res", "Unable to cancel the reservation in the past");
+			return "customer/resvsPage";
 		}
 		// otherwise can delete the reservation
 		resvService.deleteResv(resvMute.getResv_no());
 		resv.setUID(this.getUidFromSession(session));
 		resvList = resvService.getResvListBy(resv);
 		model.addAttribute("resvList", resvList);
+		model.addAttribute("submit_res", "Canceled the reservation.");
 		return "customer/resvsPage";
 	}
 	

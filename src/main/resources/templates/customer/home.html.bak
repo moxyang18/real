@@ -1,0 +1,43 @@
+<!DOCTYPE html><html xmlns="http://www.thymeleaf.org">
+<head><meta charset="UTF-8">
+<title>Customer Home</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<style>
+#div{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:100px;
+}
+body {
+  background-image: url("https://static.scientificamerican.com/sciam/cache/file/B73C6A04-9155-44EC-B80AA2B5E9E62508.jpg");
+  background-position: center;
+  background-repeat: repeat-Y;
+  background-size: cover;
+}
+</style>
+</head>
+<body>   Welcome to Customer Home!
+<br><br>
+<div align="center" id="div">
+<a href="/bookList"><button class="btn bg-primary text-light">Book Gallery</button></a> 
+<a href="/authBookList"><button class="btn bg-primary text-light">Work Gallery</button></a> 
+<a href="/authList"><button class="btn bg-primary text-light">Author Gallery</button></a> <br><br> 
+<a href="/copyList"><button class="btn bg-danger text-light">Copy Rental Service</button></a> 
+<a href="/ownRentalRecords"><button class="btn bg-danger text-light">Rental History</button></a> <br><br> 
+
+<a href="/ownInvoices"><button class="btn bg-success text-light">Invoice Payment Service</button></a> 
+<a href="/ownPayments"><button class="btn bg-success text-light">Payment History</button></a> <br><br> 
+
+
+<a href="/futureExhibitions"><button class="btn bg-info text-light">Exhibition</button></a> <br><br>
+<a href="/viewOwnRegistration"><button class="btn bg-dark text-light">Exhibition Registration</button></a> <br><br> 
+
+<a href="/ownResvList"><button class="btn bg-warning text-light">Study Room Reservation</button></a> <br><br>
+
+<a href="/custProfile"><button class="btn bg-secondary text-light">Profile</button></a> <br><br> 
+<a href="/logout"><button class="btn btn-outline-danger">Logout</button></a> <br><br>
+</div>
+
+</body>
+</html>

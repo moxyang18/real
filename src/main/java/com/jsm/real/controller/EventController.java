@@ -175,12 +175,16 @@ public class EventController extends BaseController {
 		if(data.getStop_datetime()==null||data.getStop_datetime().trim()!="") {
 			event.setStop_datetime(StringUtils.ToSqlTimeStamp(data.getStop_datetime().trim()));
 		}
+		if(data.getTopic_id()!=null&&data.getTopic_id()==0) {
+			event.setTopic_id(null);
+		} else {
+			event.setTopic_id(data.getTopic_id());
+		}
 		event.setEvent_id(data.getEvent_id());
 		if(data.getEvent_name()!=null&&data.getEvent_name().trim()!="") {
 			event.setEvent_name(data.getEvent_name().trim());
 		}
 		event.setEvent_type(data.getEvent_type());
-		event.setTopic_id(data.getTopic_id());
 		List<Event> eventList = eventService.getEventList(event);
 		model.addAttribute("eventList", eventList);
 		return "eventListPage";

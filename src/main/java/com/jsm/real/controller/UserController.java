@@ -313,7 +313,10 @@ public class UserController extends BaseController {
 			model.addAttribute("submit_res", "Error! Please specify the author's name and pen name");
 			return "authorsPage";
 		}
-		
+		if(userParts!=null&&userParts.size()>0) {
+			model.addAttribute("submit_res", "The author duplicate detected! Cannot add this author.");
+			return "authorsPage";			
+		}
 		// necessary fields are the author names, must not set username and password
 		// sanitize input first
 		user.setEmail(StringUtils.sqlSanitize(user.getEmail()));
@@ -336,6 +339,69 @@ public class UserController extends BaseController {
 		model.addAttribute("submit_res", "Successfully added an author. ");
 		return "authorsPage";
 	}
+	// this author is only for modify book/author info data entry
+	@RequestMapping("/uptAuthor")
+	public String uptAuthor(Model model, User user, Author auth, HttpSession session) {
+		// necessary fields are the author names, must not set username and password
+		// sanitize input first
+		user.setFname(StringUtils.sqlSanitize(user.getFname()));
+		user.setLname(StringUtils.sqlSanitize(user.getLname()));
+		// placeholder for the long value
+		auth.setPen_name(StringUtils.sqlSanitize(auth.getPen_name()));
+		// specify all fields
+		if(auth.getUid()==null) {
+			model.addAttribute("submit_res", "Error! Please specify the author's id for updating");
+			return "authorsPage";
+		}
+		user.setFname(StringUtils.sqlSanitize(user.getFname()));
+		user.setLname(StringUtils.sqlSanitize(user.getLname()));
+		if(user.getFname()==null||user.getFname().trim().equals("")||user.getLname()==null||
+				user.getLname().trim().equals("")||auth.getPen_name()==null||auth.getPen_name().trim().equals("")) {
+			model.addAttribute("submit_res", "Error! Please specify the author's name and pen name");
+			return "authorsPage";
+		}		
+		List<Author> authParts = new ArrayList<>();
+		List<User> userParts = new ArrayList<>();
+		//userService.queryAuthorList(auth, user.getFname(), user.getLname(), userParts, authParts); 
+		Author tmp = new Author();
+		tmp.setUid(auth.getUid());
+		userService.queryAuthorList(tmp, null, null, userParts, authParts);
+		model.addAttribute("userList", userParts);
+		model.addAttribute("authList", authParts);
+		model.addAttribute("role", this.getRoleFromSession(session));
+
+		if(authParts==null||authParts.size()==0) {
+			model.addAttribute("submit_res", "Invalid Author id. Cannot Update!");
+			return "authorsPage";			
+		}
+		
+		//get the user, and author entity, and set the corresponding fields only for update
+		Author storedDataA = userService.queryAuthList(tmp).get(0);
+		User tmp2 = new User();
+		tmp2.setUid(auth.getUid());
+		User storedDataU = userService.queryUserList(tmp2).get(0);
+		storedDataA.setPen_name(auth.getPen_name());
+		storedDataU.setFname(user.getFname());
+		storedDataU.setLname(user.getLname());
+		userService.saveUser(storedDataU);
+		userService.saveAuthor(storedDataA);
+		model.addAttribute("submit_res", "Successfully updated an author. ");
+		
+		authParts = new ArrayList<>();
+		userParts = new ArrayList<>();
+		//userService.queryAuthorList(auth, user.getFname(), user.getLname(), userParts, authParts); 
+		tmp = new Author();
+		tmp.setUid(auth.getUid());
+		userService.queryAuthorList(tmp, null, null, userParts, authParts);
+		model.addAttribute("userList", userParts);
+		model.addAttribute("authList", authParts);
+		model.addAttribute("role", this.getRoleFromSession(session));
+		
+		return "authorsPage";
+	}	
+
+	
+	
 	
 	@RequestMapping("/usersList")
 	public String usersList(Model model) {

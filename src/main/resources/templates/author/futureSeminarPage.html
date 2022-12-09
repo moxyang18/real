@@ -2,7 +2,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <style>
 #div{
-	width:600px;
+	width:1000px;
 	height:auto;
 	margin:auto;
 	margin-top:50px;
@@ -151,8 +151,9 @@ Seminar Capacity:<input type="text" name="expense"/>  <br><br>
 <tr th:each="event:${eventList}">                
 <td align="center" class="bid" id= "bid" th:text="${event.event_id}"></td>                
 <td align="center" th:text="${event.event_name}"></td>    
-<td align="center" th:text="${event.start_datetime}"></td> 
-<td align="center" th:text="${event.stop_datetime}"></td>             
+<td align="center" th:text="${#strings.substring(event.start_datetime, 0, #strings.length(event.start_datetime)-5)}"></td> 
+
+<td align="center" th:text="${#strings.substring(event.stop_datetime, 0, #strings.length(event.stop_datetime)-5)}"></td>             
 <td align="center" th:text="${event.topic_id}"></td>                          
 </tr>    
  </table>    

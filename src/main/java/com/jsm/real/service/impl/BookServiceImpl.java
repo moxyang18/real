@@ -57,6 +57,7 @@ public class BookServiceImpl implements BookService {
 	
 	@Override
 	public void deleteBook(Book book, Long authId) {
+		bookDao.delete(book);
 	}
 	
 	

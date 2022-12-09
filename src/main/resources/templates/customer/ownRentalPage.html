@@ -54,7 +54,8 @@ Rental Status:<input type="text" name="rental_status"/>  <br><br>
 <p th:text="${submit_res}" style="color:red"></p>
 
 <div  class="card" id="div" align="center">       
-<table class="table table-hover table-striped">            
+<table class="table table-hover table-striped sortable">     
+<thead>       
 <tr>                
 <th class="card-header text-center bg-danger text-light">Rental ID</th>                
 <th class="card-header text-center bg-primary text-light">Copy ID</th>     
@@ -64,7 +65,8 @@ Rental Status:<input type="text" name="rental_status"/>  <br><br>
 <th class="card-header text-center bg-primary text-light">Expected RetDate</th>     
 <th class="card-header text-center bg-info text-light">Actual RetDate</th> 
 <th class="card-header text-center bg-secondary text-light">Rental Status</th>                   
-</tr>         
+</tr>         </thead>
+<tbody>
 <tr th:each="rec,iterStat:${recList}">                
 <td align="center" th:text="${rec.rental_id}"></td>    
 <td align="center" th:text="${rec.copy_id}"></td>  
@@ -75,7 +77,7 @@ Rental Status:<input type="text" name="rental_status"/>  <br><br>
 <td align="center" th:text="${rec.act_ret_date}"></td> 
 <td align="center" th:text="${rec.rental_status}"></td>            
                       
-</tr>    
+</tr>    </tbody>
  </table>    
  </div>
  

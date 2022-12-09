@@ -1,0 +1,118 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Sponsor & Seminar</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<style>
+#div{
+	width:1000px;
+	height:auto;
+	margin:auto;
+	margin-top:50px;
+}
+#opForm{
+	background-color: coral;
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:20px;
+}
+#result{
+	width:600px;
+	height:auto;
+	margin:auto;
+	margin-top:10px;
+}
+body {
+  background-image: url("https://assets1.cbsnewsstatic.com/hub/i/2020/06/08/2f20cdef-ab96-4b51-af4e-cb44d4a4d68f/oceans-sun-promo.jpg");
+  background-position: center;
+  background-repeat: repeat-y;
+  background-size: cover;
+}
+
+</style>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> 
+ <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+function showOp(){
+	$("#opForm").show();
+}
+</script>
+</head><body class="container-fluid">    
+<button class="btn btn-primary" onclick="showOp()">Operation</button>
+<br> <br>
+<div  class="card" id="opForm" align="center" style="display:none"> 
+<form>
+Sponsor ID:   <input type="text" name="spid"/>  <br><br>
+Seminar ID:<input type="text" name="event_id"/>  <br><br>
+Sponsor Amount:<input type="text" name="sponsor_amt"/>  <br><br>
+<input type="hidden" id="queryOnly" name="queryOnly" th:value="${queryOnly}"/>
+<input type="hidden" id="role" name="role" th:value="${role}"/>
+<button id="searchBtn" value="Search" formaction="/querySponsorSem" class="btn btn-outline-secondary"> Search </button>
+<button id="addBtn" value="Insert" formaction="/addSponsorSem" class="btn btn-outline-secondary"> Insert </button>
+<button id="delBtn" value="Delete" formaction="/deleteSponsorSem" class="btn btn-outline-secondary"> Delete </button>
+</form>
+</div> 
+<p th:text="${submit_res}" style="color:red"></p>
+
+<div  class="card" id="div" align="center">       
+<table class="table table-hover table-striped">            
+<tr>                
+<th class="card-header text-center bg-dark text-light">Sponsor ID</th>   
+<th class="card-header text-center bg-primary text-light">Sponsor FName</th> 
+<th class="card-header text-center bg-dark text-light">Sponsor LName</th>             
+<th class="card-header text-center bg-primary text-light">Seminar ID</th>  
+<th class="card-header text-center bg-dark text-light">Seminar Name</th>        
+<th class="card-header text-center bg-primary text-light">Sponsored Amount</th>                      
+</tr>         
+<tr th:each="semSponsor,iterStat:${semSponsorList}">                
+<td align="center" th:text="${semSponsor.spid}"></td>                
+<td align="center" th:text="${sponsorList[iterStat.index].fname}"></td>
+<td align="center" th:text="${sponsorList[iterStat.index].lname}"></td>                 
+<td align="center" th:text="${semSponsor.event_id}"></td>   
+<td align="center" th:text="${eventList[iterStat.index].event_name}"></td> 
+<td align="center" th:text="${semSponsor.sponsor_amt}"></td>                         
+</tr>    
+ </table>    
+ </div>
+ 
+ <a id = "homeButton" href="/index"><button class="btn btn-info">Home</button></a>    
+  <a href="/logout"><button class="btn btn-danger">Logout</button></a>                                    
+ </body>
+ 
+ <script>
+if($("#queryOnly").val()=="true") {
+	$("#searchBtn").show();
+	$("#delBtn").hide();
+	$("#addBtn").hide();
+} else {
+	$("#searchBtn").show();
+	$("#delBtn").show();
+	$("#addBtn").show();
+}
+
+if($("#role").val()=="STAFF") {
+	$("#searchBtn").show();
+	$("#delBtn").show();
+	$("#addBtn").show();
+} else {
+	$("#searchBtn").show();
+	$("#delBtn").hide();
+	$("#addBtn").hide();
+}
+
+</script>
+<script type="text/javascript">
+
+var role = document.getElementById("role").value;
+    if (role == "AUTHOR") { // use == to compare value
+        document.getElementById("homeButton").href="/authorHome"; 
+    } else if (role == "CUSTOMER"){
+        document.getElementById("homeButton").href="/customerHome";
+    } else if (role == "ADMIN"){
+    	document.getElementById("homeButton").href="/adminHome";
+    } else if (role == "STAFF"){
+    	document.getElementById("homeButton").href="/empHome";
+    }
+</script>
+
+
+ 

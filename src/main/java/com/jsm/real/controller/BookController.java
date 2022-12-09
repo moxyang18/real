@@ -81,6 +81,9 @@ public class BookController extends BaseController {
 		model.addAttribute("topicList", topicList);
 		// add role to view
 		model.addAttribute("role", this.getRoleFromSession(session));
+		if(book.getTopic_id()!=null&&book.getTopic_id()==0) {
+			book.setTopic_id(null);
+		}
 		// TODO modify the hard coded limit
 		if((book.getBook_name()==null||book.getBook_name().trim()=="")&&book.getTopic_id()==null&&book.getBid()==null&&(topicName==null||topicName.trim()=="")) {
 			model.addAttribute("submit_res", "query all");
@@ -106,7 +109,7 @@ public class BookController extends BaseController {
 		} else if(book.getBook_name()==null||book.getBook_name().trim()=="") {
 			model.addAttribute("submit_res", "please specify book name");
 			return "booksPage";			
-		} else if(book.getTopic_id()==null) {
+		} else if(book.getTopic_id()==null||book.getTopic_id()==0) {
 			model.addAttribute("submit_res", "please specify topic id");
 			return "booksPage";				
 		}
@@ -135,9 +138,39 @@ public class BookController extends BaseController {
 		topicParts = new ArrayList<>();
 		bookService.getBookList(book, null, 2000, bookParts, topicParts);
 		model.addAttribute("bookList", bookParts);
-		model.addAttribute("topicListLower", topicParts);
+		model.addAttribute("topicLowerList", topicParts);
 		return "booksPage";
 	}	
+	
+	@Transactional
+	@RequestMapping("/deleteBook")
+	public String deleteBook(Model model, Book book, HttpSession session) {
+		// add role to view
+		model.addAttribute("role", this.getRoleFromSession(session));
+		// TODO modify the hard coded limit
+		if(book.getBid()==null) {
+			model.addAttribute("submit_res", "please specify book id");
+			return "booksPage";
+		}
+		// if the book id is invalid, cannot edit
+		Book idCheck = new Book();
+		idCheck.setBid(book.getBid());
+		List<Book> bookParts = new ArrayList<>();
+		List<Topic> topicParts = new ArrayList<>();
+		bookService.getBookList(idCheck, null, 2000, bookParts, topicParts);
+		if(bookParts.size()<1) {
+			model.addAttribute("submit_res", "please select valid book id");
+			return "booksPage";				
+		}
+		bookService.deleteBook(book, null);
+		model.addAttribute("submit_res", "delete success!");
+		bookParts = new ArrayList<>();
+		topicParts = new ArrayList<>();
+		bookService.getBookList(book, null, 2000, bookParts, topicParts);
+		model.addAttribute("bookList", bookParts);
+		model.addAttribute("topicLowerList", topicParts);
+		return "booksPage";				
+	}
 	
 	
 	@Transactional
@@ -239,12 +272,12 @@ public class BookController extends BaseController {
 			return "authBooksPage";
 		}		
 		// the mapping needs to exist already
-		if(!bookService.existsAuthBook(authBook.getUID(), authBook.getBid())) {
+		if(!bookService.existsAuthBook(authBook.getBid(),authBook.getUID())) {
 			model.addAttribute("submit_res", "The authorBook relationship does not exist!");
 			return "authBooksPage";			
 		}
 		// after input validation, can now delete the mapping
-		bookService.delAuthBook(authBook.getUID(), authBook.getBid());
+		bookService.delAuthBook(authBook.getBid(),authBook.getUID());
 		model.addAttribute("submit_res", "Successfully deleted an author/book entry!");
 		authBookParts = new ArrayList<>();
 		bookParts = new ArrayList<>();

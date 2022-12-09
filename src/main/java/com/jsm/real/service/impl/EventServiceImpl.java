@@ -250,4 +250,16 @@ public class EventServiceImpl implements EventService{
 		return true;
 	}
 
+	@Override
+	public boolean existsSeminar(Long event_id) {
+		sf = cfg.buildSessionFactory();			
+		Session session = sf.openSession();
+		Transaction tx = session.beginTransaction();
+		List<Seminar> res = session.createQuery("from Seminar where event_id = "+event_id+" ", Seminar.class).getResultList();
+		tx.commit();
+		session.close();
+		if(res==null||res.size()<1) return false;
+		return true;
+	}
+	
 }

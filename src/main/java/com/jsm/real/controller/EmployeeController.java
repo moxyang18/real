@@ -323,6 +323,11 @@ public class EmployeeController extends BaseController {
 		return outPage;		
 	}
 	
+	@RequestMapping("/employeeBenefits")
+	public String employeeBenefits() {
+		return "empBenefitPage";
+	}
+	
 	@RequestMapping("/uptEmpUserpwd")
 	public String uptEmpUserpwd(Model model, @RequestParam(name="OLDPWD", required=true) String oldPwd, @RequestParam(name="PWD", required=true) String pwd, HttpSession session) {
 		String outPage = "employee/profilePage";

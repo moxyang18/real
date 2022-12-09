@@ -43,8 +43,15 @@ function showOp(){
 <form>
 Bid:   <input type="text" name="bid"/>  <br><br>
 Book Name:<input type="text" name="book_name"/>  <br><br>
-Topic Id:<input type="text" name="topic_id"/>  <br><br>
-Topic Name:<input type="text" name="topicName"/>  <br><br>
+Topic:
+<h6>
+<select class="form-control" name="topic_id" style="width: 120px;"> 
+<option value="0">select topic</option>
+<option th:each="topic:${topicList}" th:value="${topic.topic_id}" th:text="${topic.topic_name}"></option>
+</select>
+</h6>
+
+
 <input type="hidden" id="queryOnly" name="queryOnly" th:value="${queryOnly}"/>
 <input type="hidden" id="role" name="role" th:value="${role}"/>
 <button id="searchBtn" value="Search" formaction="/queryBook" class="btn btn-outline-secondary"> Search </button>
@@ -60,7 +67,8 @@ Topic Name:<input type="text" name="topicName"/>  <br><br>
 <th class="card-header text-center bg-danger text-light">Book Id</th>                
 <th class="card-header text-center bg-primary text-light">Book Name</th>     
 <th class="card-header text-center bg-info text-light">Topic Id</th> 
-<th class="card-header text-center bg-secondary text-light">Topic Name</th>                       
+<th class="card-header text-center bg-secondary text-light">Topic Name</th>   
+              
 </tr>         
 <tr th:each="book,iterStat:${bookList}">                
 <td align="center" class="bid" id= "bid" th:text="${book.bid}"></td>                
@@ -76,7 +84,7 @@ Topic Name:<input type="text" name="topicName"/>  <br><br>
  </body>
  
  <script>
-if($("#queryOnly").val()=="true") {
+if($("#role").val()!="STAFF") {
 	$("#searchBtn").show();
 	$("#uptBtn").hide();
 	$("#delBtn").hide();

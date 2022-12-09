@@ -38,6 +38,7 @@ body {
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> 
  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script>
 function showOp(){
 	$("#opForm").show();
@@ -46,6 +47,18 @@ function showOp(){
 function showPay(){
 	$("#opForm").hide();
 	$("#payForm").show();
+}
+function showCardInfo(){
+	$("#card_field").show();
+	$("#palpal_field").hide();
+}
+function hideInfo(){
+	$("#card_field").hide();
+	$("#palpal_field").hide();
+}
+function showPalPalInfo(){
+	$("#card_field").hide();
+	$("#palpal_field").show();	
 }
 </script>
 </head><body class="container-fluid">    
@@ -60,6 +73,9 @@ Invoice Amt:   <input type="text" name="invoice_amt" th:value="${invoice_amt}"/>
 Invoice Date:   <input type="text" name="invoice_date" th:value="${invoice_date}"/>  <br><br>
 Paid Status:   <input type="text" name="paid_status" th:value="${paid_status}"/>  <br><br>
 Amt to Pay:   <input type="text" name="amt_to_pay" th:value="${amt_to_pay}"/>  <br><br>
+
+
+
 Copy ID:<input type="text" name="copyId"/>  <br><br>
 <button id="searchBtn" value="Search" formaction="/qryOwnInvoices" class="btn btn-outline-secondary"> Search </button>
 </form>
@@ -68,11 +84,28 @@ Copy ID:<input type="text" name="copyId"/>  <br><br>
 <div  class="card" id="payForm" align="center" style="display:none"> 
 <form>
 Invoice ID:   <input type="text" name="invoice_id" th:value="${invoice_id}" required/>  <br><br>
-Paid Amount:   <input type="text" name="paid_amt" th:value="${invoice_id}" required/>  <br><br>
-Payment Method:    <input type="text" name="PAID_METHOD" th:value="${PAID_METHOD}" required/>  <br><br>
-CardHolder First Name:   <input type="text" name="card_hdr_fname" th:value="${card_hdr_fname}" required/>  <br><br>
-CardHolder Last Name:   <input type="text" name="card_hdr_lname" th:value="${card_hdr_lname}" required/>  <br><br>
-<button id="searchBtn" value="Make Payment" formaction="/makePayment" class="btn btn-outline-secondary"> Make Payment </button>
+Paid Amount:   <input type="text" name="paid_amt" th:value="${paid_amt}" required/>  <br><br>
+Payment Method: <br> <!-- <input type="text" name="PAID_METHOD" th:value="${PAID_METHOD}" required/>  <br><br> -->  
+<i class="fa fa-dollar" style="font-size:24px"></i> Cash: <input type="radio" name="PAID_METHOD" th:value="1" onclick="hideInfo()"> 
+&nbsp&nbsp
+<i class="fa fa-credit-card" style="font-size:24px;color:green"></i> Credit Card: <input type="radio" name="PAID_METHOD" th:value="2" onclick="showCardInfo()"> 
+&nbsp&nbsp
+<i class="fa fa-credit-card" style="font-size:24px;color:red"></i> Debit Card: <input type="radio" name="PAID_METHOD" th:value="3" onclick="showCardInfo()"> 
+&nbsp&nbsp
+<i class="fa fa-cc-paypal" style="font-size:24px;color:blue"></i> PayPal: <input type="radio" name="PAID_METHOD" th:value="4" onclick="showPalPalInfo()"> 
+<br><br>
+<div id="card_field" style="display:none">
+CardHolder First Name:   <input type="text" name="card_hdr_fname" th:value="${card_hdr_fname}"/>  <br><br>
+CardHolder Last Name:   <input type="text" name="card_hdr_lname" th:value="${card_hdr_lname}"/>  <br><br>
+CardNumber: <input type="text">
+Expiration Date: <input type = "date">
+CVV/CVC： <input type="password">
+</div>
+<div id="palpal_field" style="display:none">
+PalPal Username/Email:   <input type="text"/>  <br><br>
+Password:   <input type="password" />  <br><br>
+</div>
+<button id="makePmtBtn" value="Make Payment" formaction="/makePayment" class="btn btn-outline-secondary"> Make Payment </button>
 </form>
 </div> 
 

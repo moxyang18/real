@@ -36,5 +36,7 @@ public interface EventService {
 	
 	// check whether the event exists in the future
 	boolean existsFutureExhibition(Long event_id);
+	// check whether the seminar exists
+	boolean existsSeminar(Long event_id);
 	
 }

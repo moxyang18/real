@@ -45,8 +45,9 @@ First Name:<input type="text" name="fname"/>  <br><br>
 Last Name:<input type="text" name="lname"/>  <br><br>
 Pen Name:<input type="text" name="pen_name"/>  <br><br>
 <input type="hidden" id="role" name="role" th:value="${role}"/>
-<button id="searchBtn" value="Search" formaction="/queryAuthor" class="btn btn-outline-secondary"> Search </button>
-<button id="addBtn" value="Insert" formaction="/enterAuthor" class="btn btn-outline-secondary"> Add </button>
+<button id="searchBtn" value="Search" formaction="/queryAuthor" class="btn btn-secondary"> Search </button>
+<button id="addBtn" value="Insert" formaction="/enterAuthor" class="btn btn-secondary"> Add </button>
+<button id="UptBtn" value="Update" formaction="/uptAuthor" class="btn btn-secondary"> Update </button>
 </form>
 </div> 
 <p th:text="${submit_res}" style="color:red"></p>
@@ -78,10 +79,12 @@ if($("#role").val()=="STAFF") {
 	$("#searchBtn").show();
 	$("#delBtn").show();
 	$("#addBtn").show();
+	$("#UptBtn").show();
 } else {
 	$("#searchBtn").show();
 	$("#delBtn").hide();
 	$("#addBtn").hide();
+	$("#UptBtn").hide();
 }
 
 </script>
